@@ -1,0 +1,22 @@
+.full-width {
+    background: black;
+    height: 300px;
+}
+
+.standard-padding-vertical {
+    padding: 1em 0;
+}
+
+.parallax-half-width {
+    padding: 4em 0;
+}
+
+.parallax-container {
+    padding: 5em 0;
+}
+
+/* plugin styles */
+.parallax {
+    background-size: cover;
+    margin: 5em 0;
+}
