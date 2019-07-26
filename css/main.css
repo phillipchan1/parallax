@@ -18,5 +18,6 @@
 /* plugin styles */
 .parallax {
     background-size: cover;
+    background-repeat: no-repeat;
     margin: 5em 0;
 }
