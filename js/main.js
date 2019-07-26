@@ -25,12 +25,8 @@ var parallax = (function() {
                 return
             }
 
-            console.log()
-
             el.style.backgroundPosition = `0 -${el.getBoundingClientRect().top /
                 2}px `
-
-            console.log(`picture ${i + 1} in viewport!`)
         })
     })
 })()
