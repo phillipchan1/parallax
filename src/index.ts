@@ -1,14 +1,14 @@
 import { isInViewport } from './lib/isInViewport';
 
-var paralaxElements = document.querySelectorAll('.parallax');
+var parallaxElements = document.querySelectorAll('.parallax');
 
 // init
-paralaxElements.forEach(el => {});
+parallaxElements.forEach(el => {});
 
 // determines if an element is in the viewport
 
 window.addEventListener('scroll', () => {
-	paralaxElements.forEach((el: HTMLElement) => {
+	parallaxElements.forEach((el: HTMLElement) => {
 		if (!isInViewport(el)) {
 			return;
 		}
