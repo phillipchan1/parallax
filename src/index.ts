@@ -1,23 +1,15 @@
 import * as _ from 'lodash'
 
-import { isInViewport } from './lib/isInViewport'
 import { init } from './init'
+import { doParallaxEffect } from './lib/doParallaxEffect'
 
 var parallaxElements = document.querySelectorAll('.parallax')
 
 window.onload = function() {
   var elementSpecs = init(parallaxElements)
-  console.log('TCL: window.onload -> elementSpecs', elementSpecs)
 
   window.addEventListener('scroll', () => {
-    parallaxElements.forEach((el: HTMLElement) => {
-      if (!isInViewport(el)) {
-        return
-      }
-
-      el.style.backgroundPosition = `0 -${el.getBoundingClientRect().top /
-        2}px `
-    })
+    doParallaxEffect(parallaxElements)
   })
 
   window.addEventListener(

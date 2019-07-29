@@ -127,7 +127,7 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar _ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\nvar isInViewport_1 = __webpack_require__(/*! ./lib/isInViewport */ \"./src/lib/isInViewport.ts\");\nvar init_1 = __webpack_require__(/*! ./init */ \"./src/init.ts\");\nvar parallaxElements = document.querySelectorAll('.parallax');\nwindow.onload = function () {\n    var elementSpecs = init_1.init(parallaxElements);\n    console.log('TCL: window.onload -> elementSpecs', elementSpecs);\n    window.addEventListener('scroll', function () {\n        parallaxElements.forEach(function (el) {\n            if (!isInViewport_1.isInViewport(el)) {\n                return;\n            }\n            el.style.backgroundPosition = \"0 -\" + el.getBoundingClientRect().top /\n                2 + \"px \";\n        });\n    });\n    window.addEventListener('resize', _.debounce(function () {\n        elementSpecs = init_1.init(parallaxElements);\n    }, 500));\n};\n\n\n//# sourceURL=webpack:///./src/index.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar _ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\nvar init_1 = __webpack_require__(/*! ./init */ \"./src/init.ts\");\nvar doParallaxEffect_1 = __webpack_require__(/*! ./lib/doParallaxEffect */ \"./src/lib/doParallaxEffect.ts\");\nvar parallaxElements = document.querySelectorAll('.parallax');\nwindow.onload = function () {\n    var elementSpecs = init_1.init(parallaxElements);\n    window.addEventListener('scroll', function () {\n        doParallaxEffect_1.doParallaxEffect(parallaxElements);\n    });\n    window.addEventListener('resize', _.debounce(function () {\n        elementSpecs = init_1.init(parallaxElements);\n    }, 500));\n};\n\n\n//# sourceURL=webpack:///./src/index.ts?");
 
 /***/ }),
 
@@ -140,6 +140,18 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar _ 
 
 "use strict";
 eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar getBackgroundImageURLfromElement_1 = __webpack_require__(/*! ./lib/getBackgroundImageURLfromElement */ \"./src/lib/getBackgroundImageURLfromElement.ts\");\nvar getImageSize_1 = __webpack_require__(/*! ./lib/getImageSize */ \"./src/lib/getImageSize.ts\");\nexports.init = function (elements) {\n    var specs = [];\n    elements.forEach(function (el) {\n        var url = getBackgroundImageURLfromElement_1.getBackgroundImageURLFromElement(el);\n        var imageSize = getImageSize_1.getImageSize(url);\n        specs.push(imageSize);\n        return imageSize;\n        el.style.backgroundPosition = '0px 0';\n    });\n    return specs;\n};\n\n\n//# sourceURL=webpack:///./src/init.ts?");
+
+/***/ }),
+
+/***/ "./src/lib/doParallaxEffect.ts":
+/*!*************************************!*\
+  !*** ./src/lib/doParallaxEffect.ts ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar isInViewport_1 = __webpack_require__(/*! ./isInViewport */ \"./src/lib/isInViewport.ts\");\nexports.doParallaxEffect = function (elements) {\n    elements.forEach(function (el) {\n        if (!isInViewport_1.isInViewport(el)) {\n            return;\n        }\n        el.style.backgroundPosition = \"0 -\" + el.getBoundingClientRect().top / 4 + \"px \";\n    });\n};\n\n\n//# sourceURL=webpack:///./src/lib/doParallaxEffect.ts?");
 
 /***/ }),
 
