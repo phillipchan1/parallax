@@ -1,23 +1,14 @@
 import { getBackgroundImageURLFromElement } from './lib/getBackgroundImageURLfromElement'
 import { getImageSize } from './lib/getImageSize'
+import { config } from './config'
 
-type ElementSpec = {
-  height: number
-  width: number
-}
-
-export const init = (elements: NodeList): ElementSpec[] => {
-  const specs = []
-
+export const initAndGetConfig = (elements: NodeList): any => {
   elements.forEach((el: HTMLElement) => {
     const url = getBackgroundImageURLFromElement(el)
     const imageSize = getImageSize(url)
-
-    specs.push(imageSize)
-    return imageSize
-
-    el.style.backgroundPosition = '0px 0'
+    console.log('TCL: imageSize', imageSize)
+    console.log(el.getBoundingClientRect())
   })
 
-  return specs
+  return config
 }

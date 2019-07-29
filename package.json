@@ -19,6 +19,7 @@
 		"webpack-cli": "^3.3.6"
 	},
 	"dependencies": {
+		"document-offset": "^1.0.4",
 		"lodash": "^4.17.15"
 	}
 }

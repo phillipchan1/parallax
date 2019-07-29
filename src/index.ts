@@ -1,21 +1,21 @@
 import * as _ from 'lodash'
 
-import { init } from './init'
+import { initAndGetConfig } from './initAndGetConfig'
 import { doParallaxEffect } from './lib/doParallaxEffect'
 
 var parallaxElements = document.querySelectorAll('.parallax')
 
 window.onload = function() {
-  var elementSpecs = init(parallaxElements)
+  var config = initAndGetConfig(parallaxElements)
 
   window.addEventListener('scroll', () => {
-    doParallaxEffect(parallaxElements)
+    doParallaxEffect(parallaxElements, config)
   })
 
   window.addEventListener(
     'resize',
     _.debounce(() => {
-      elementSpecs = init(parallaxElements)
+      initAndGetConfig(parallaxElements)
     }, 500)
   )
 }
