@@ -5,7 +5,7 @@ gulp.task('webserver', function() {
   gulp.src('./').pipe(
     server({
       livereload: true,
-      defaultFile: '/example/index.html',
+      defaultFile: 'index.html',
       directoryListing: false,
       open: true
     })
