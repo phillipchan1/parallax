@@ -13,23 +13,17 @@ export const doParallaxEffect = (elements: NodeList, config: any): void => {
     const elementHeight = boundingClientRect.height
     const imageHeight = config.elementSpecs[i]['height']
 
-    // based on scroll left, how much of picture is left
-
-    console.log(`TCL: top ${i}`, boundingClientRect.top)
-
-    const pixelsLeftToScroll = boundingClientRect.top + elementHeight
-    console.log(`TCL: pixelsLeft ${i}`, pixelsLeftToScroll)
     const pixelsOverflowing = imageHeight - elementHeight
-    console.log(`TCL: pixelsOverflowing ${i}`, pixelsOverflowing)
 
     let pixelIncrementsToMove =
       el.getBoundingClientRect().top * config.speedRatio
 
-    if (pixelsOverflowing > pixelsLeftToScroll) {
-      console.log(`${i} mode safety`)
-      percentageInViewport * imageHeight
+    // mode of operation if amount of image overflowing is less than
+    // pixels left to scroll in the document
+    if (config.modeToMove[i] === 'safety') {
+      pixelIncrementsToMove = (1 - percentageInViewport) * pixelsOverflowing
     }
 
-    el.style.backgroundPosition = `0 ${pixelIncrementsToMove}px`
+    el.style.backgroundPosition = `0 -${pixelIncrementsToMove}px`
   })
 }
