@@ -218,7 +218,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ge
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar isInViewport_1 = __webpack_require__(/*! ./isInViewport */ \"./src/lib/isInViewport.ts\");\nvar offset = __webpack_require__(/*! document-offset */ \"./node_modules/document-offset/index.js\");\nexports.doParallaxEffect = function (elements, config) {\n    elements.forEach(function (el, i) {\n        if (!isInViewport_1.isInViewport(el)) {\n            return;\n        }\n        var elementDimensions = el.getBoundingClientRect();\n        var elementOffset = offset(el);\n        var percentageInViewport = (pageYOffset + window.innerHeight) /\n            (elementOffset.top + window.innerHeight + elementDimensions.height);\n        console.log(\"percentageInViewport of \" + i, percentageInViewport);\n        el.style.backgroundPosition = \"0 -\" + el.getBoundingClientRect().top *\n            config.speedRatio + \"px \";\n    });\n};\n\n\n//# sourceURL=webpack:///./src/lib/doParallaxEffect.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar isInViewport_1 = __webpack_require__(/*! ./isInViewport */ \"./src/lib/isInViewport.ts\");\nvar getScrollPercentage_1 = __webpack_require__(/*! ./getScrollPercentage */ \"./src/lib/getScrollPercentage.ts\");\nexports.doParallaxEffect = function (elements, config) {\n    elements.forEach(function (el, i) {\n        if (!isInViewport_1.isInViewport(el)) {\n            return;\n        }\n        var percentageInViewport = getScrollPercentage_1.getScrollPercentage(el);\n        el.style.backgroundPosition = \"0 -\" + el.getBoundingClientRect().top *\n            config.speedRatio + \"px \";\n    });\n};\n\n\n//# sourceURL=webpack:///./src/lib/doParallaxEffect.ts?");
 
 /***/ }),
 
@@ -243,6 +243,18 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexport
 
 "use strict";
 eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.getImageSize = function (url) {\n    var image = new Image();\n    image.src = url;\n    return {\n        width: image.width,\n        height: image.height\n    };\n};\n\n\n//# sourceURL=webpack:///./src/lib/getImageSize.ts?");
+
+/***/ }),
+
+/***/ "./src/lib/getScrollPercentage.ts":
+/*!****************************************!*\
+  !*** ./src/lib/getScrollPercentage.ts ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar offset = __webpack_require__(/*! document-offset */ \"./node_modules/document-offset/index.js\");\nexports.getScrollPercentage = function (el) {\n    var elementDimensions = el.getBoundingClientRect();\n    var elementOffset = offset(el);\n    var percentage = (pageYOffset + window.innerHeight - elementOffset.top) /\n        (window.innerHeight + elementDimensions.height);\n    // round to nearest hundered\n    return Math.round(percentage * 100) / 100;\n};\n\n\n//# sourceURL=webpack:///./src/lib/getScrollPercentage.ts?");
 
 /***/ }),
 
