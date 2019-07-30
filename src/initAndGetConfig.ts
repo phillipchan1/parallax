@@ -1,3 +1,5 @@
+import * as offset from 'document-offset'
+
 import { getBackgroundImageURLFromElement } from './lib/getBackgroundImageURLfromElement'
 import { getImageSize } from './lib/getImageSize'
 import { config } from './config'
@@ -15,10 +17,13 @@ export const initAndGetConfig = (elements: NodeList): any => {
     const boundingClientRect = el.getBoundingClientRect()
     const elementHeight = boundingClientRect.height
     const pixelsOverflowing = imageSize.height - elementHeight
+    const elementOffset = offset(el)
 
-    console.log(`TCL: pixelsOverflowing`, pixelsOverflowing)
-
-    elementSpecs[i] = imageSize
+    elementSpecs[i] = {
+      ...imageSize,
+      pixelsOverflowing,
+      offsetTop: elementOffset.top
+    }
     if (pixelsOverflowing < window.innerHeight) {
       modeToMove[i] = 'safety'
     } else {

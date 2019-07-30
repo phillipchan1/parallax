@@ -16,12 +16,16 @@ export const doParallaxEffect = (elements: NodeList, config: any): void => {
     const pixelsOverflowing = imageHeight - elementHeight
 
     let pixelIncrementsToMove =
-      el.getBoundingClientRect().top * config.speedRatio
+      (window.pageYOffset -
+        config.elementSpecs[i]['offsetTop'] +
+        window.innerHeight) *
+      config.speedRatio
 
     // mode of operation if amount of image overflowing is less than
     // pixels left to scroll in the document
     if (config.modeToMove[i] === 'safety') {
-      pixelIncrementsToMove = (1 - percentageInViewport) * pixelsOverflowing
+      pixelIncrementsToMove =
+        percentageInViewport * pixelsOverflowing * config.speedRatio * 1.5
     }
 
     el.style.backgroundPosition = `0 -${pixelIncrementsToMove}px`

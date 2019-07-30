@@ -1,3 +1,3 @@
 export const config = {
-  speedRatio: 0.5
+  speedRatio: 0.1
 }
