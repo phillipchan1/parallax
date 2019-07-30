@@ -3,12 +3,19 @@ import { getImageSize } from './lib/getImageSize'
 import { config } from './config'
 
 export const initAndGetConfig = (elements: NodeList): any => {
-  elements.forEach((el: HTMLElement) => {
+  var elementSpecs = []
+
+  elements.forEach((el: HTMLElement, i) => {
+    el.style.backgroundPosition = '0px 0px'
+
     const url = getBackgroundImageURLFromElement(el)
     const imageSize = getImageSize(url)
-    console.log('TCL: imageSize', imageSize)
-    console.log(el.getBoundingClientRect())
+
+    elementSpecs[i] = imageSize
   })
 
-  return config
+  return {
+    ...config,
+    elementSpecs
+  }
 }
