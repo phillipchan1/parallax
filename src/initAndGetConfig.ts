@@ -10,7 +10,7 @@ export const initAndGetConfig = (elements: NodeList): any => {
   var modeToMove = []
 
   elements.forEach((el: HTMLElement, i) => {
-    el.style.backgroundPosition = '50% 0px'
+    el.style.backgroundPosition = `${config.defaultXPosition} 0px`
 
     const url = getBackgroundImageURLFromElement(el)
     const imageSize = getImageSize(url)
@@ -27,6 +27,7 @@ export const initAndGetConfig = (elements: NodeList): any => {
       pixelsOverflowing,
       offsetTop: elementOffset.top
     }
+
     if (pixelsOverflowing < window.innerHeight) {
       modeToMove[i] = 'safety'
     } else {
