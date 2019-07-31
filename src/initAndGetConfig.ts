@@ -5,7 +5,9 @@ import { getImageSize } from './lib/getImageSize'
 import { getPixelsOverflowing } from './lib/getPixelsOverflowing'
 import { config } from './config'
 
-export const initAndGetConfig = (elements: NodeList): any => {
+import { Config } from './types/Config'
+
+export const initAndGetConfig = (elements: NodeList): Config => {
   var elementSpecs = []
   var modeToMove = []
 
