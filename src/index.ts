@@ -7,8 +7,8 @@ var parallaxElements = document.querySelectorAll('.parallax')
 
 window.onload = function() {
   var config = initAndGetConfig(parallaxElements)
+  doParallaxEffect(parallaxElements, config)
 
-  console.log('TCL: window.onload -> config', config)
   window.addEventListener('scroll', () => {
     doParallaxEffect(parallaxElements, config)
   })
@@ -17,6 +17,7 @@ window.onload = function() {
     'resize',
     _.debounce(() => {
       config = initAndGetConfig(parallaxElements)
+      doParallaxEffect(parallaxElements, config)
     }, 500)
   )
 }
