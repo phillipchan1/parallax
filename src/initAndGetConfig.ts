@@ -2,6 +2,7 @@ import * as offset from 'document-offset'
 
 import { getBackgroundImageURLFromElement } from './lib/getBackgroundImageURLfromElement'
 import { getImageSize } from './lib/getImageSize'
+import { getPixelsOverflowing } from './lib/getPixelsOverflowing'
 import { config } from './config'
 
 export const initAndGetConfig = (elements: NodeList): any => {
@@ -9,14 +10,16 @@ export const initAndGetConfig = (elements: NodeList): any => {
   var modeToMove = []
 
   elements.forEach((el: HTMLElement, i) => {
-    el.style.backgroundPosition = '0px 0px'
+    el.style.backgroundPosition = '50% 0px'
 
     const url = getBackgroundImageURLFromElement(el)
     const imageSize = getImageSize(url)
-
     const boundingClientRect = el.getBoundingClientRect()
-    const elementHeight = boundingClientRect.height
-    const pixelsOverflowing = imageSize.height - elementHeight
+
+    const pixelsOverflowing = getPixelsOverflowing(
+      boundingClientRect,
+      imageSize
+    )
     const elementOffset = offset(el)
 
     elementSpecs[i] = {

@@ -1,7 +1,4 @@
-type ImageSize = {
-  width: number
-  height: number
-}
+import { ImageSize } from '../types/ImageSize'
 
 export const getImageSize = (url: string): ImageSize => {
   var image = new Image()

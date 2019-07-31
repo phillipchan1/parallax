@@ -1,6 +1,5 @@
 import { isInViewport } from './isInViewport'
 import { getScrollPercentage } from './getScrollPercentage'
-import { getBackgroundImageURLFromElement } from './getBackgroundImageURLfromElement'
 
 export const doParallaxEffect = (elements: NodeList, config: any): void => {
   elements.forEach((el: HTMLElement, i: number) => {
@@ -9,11 +8,7 @@ export const doParallaxEffect = (elements: NodeList, config: any): void => {
     }
 
     const percentageInViewport = getScrollPercentage(el)
-    const boundingClientRect = el.getBoundingClientRect()
-    const elementHeight = boundingClientRect.height
-    const imageHeight = config.elementSpecs[i]['height']
-
-    const pixelsOverflowing = imageHeight - elementHeight
+    const pixelsOverflowing = config.elementSpecs[i]['pixelsOverflowing']
 
     let pixelIncrementsToMove =
       (window.pageYOffset -
@@ -25,7 +20,7 @@ export const doParallaxEffect = (elements: NodeList, config: any): void => {
     // pixels left to scroll in the document
     if (config.modeToMove[i] === 'safety') {
       pixelIncrementsToMove =
-        percentageInViewport * pixelsOverflowing * config.speedRatio * 1.5
+        percentageInViewport * pixelsOverflowing * config.speedRatio
     }
 
     el.style.backgroundPosition = `0 -${pixelIncrementsToMove}px`
