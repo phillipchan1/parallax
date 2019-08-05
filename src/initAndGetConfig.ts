@@ -2,14 +2,12 @@ import * as offset from 'document-offset'
 
 import { getBackgroundImageURLFromElement } from './lib/getBackgroundImageURLfromElement'
 import { getImageSize } from './lib/getImageSize'
-import { getPixelsOverflowing } from './lib/getPixelsOverflowing'
 import { config } from './config'
-
 import { Config } from './types/Config'
 
 export const initAndGetConfig = (elements: NodeList): Config => {
   var elementSpecs = []
-  var modeToMove = []
+  var elementsPixelsOverflowing = []
 
   elements.forEach((el: HTMLElement, i) => {
     el.style.backgroundPosition = `${config.defaultXPosition} 0px`
@@ -17,11 +15,10 @@ export const initAndGetConfig = (elements: NodeList): Config => {
     const url = getBackgroundImageURLFromElement(el)
     const imageSize = getImageSize(url)
     const boundingClientRect = el.getBoundingClientRect()
+    const elementHeight = boundingClientRect.height
+    const pixelsOverflowing = imageSize.height - elementHeight
 
-    const pixelsOverflowing = getPixelsOverflowing(
-      boundingClientRect,
-      imageSize
-    )
+    elementsPixelsOverflowing.push(pixelsOverflowing)
     const elementOffset = offset(el)
 
     elementSpecs[i] = {
@@ -29,17 +26,13 @@ export const initAndGetConfig = (elements: NodeList): Config => {
       pixelsOverflowing,
       offsetTop: elementOffset.top
     }
-
-    if (pixelsOverflowing < window.innerHeight) {
-      modeToMove[i] = 'safety'
-    } else {
-      modeToMove[i] = 'normal'
-    }
   })
+
+  const smallestPixelsOverFlowing = Math.min(...elementsPixelsOverflowing)
 
   return {
     ...config,
     elementSpecs,
-    modeToMove
+    smallestPixelsOverFlowing
   }
 }

@@ -7,25 +7,14 @@ export const doParallaxEffect = (elements: NodeList, config: any): void => {
     if (!isInViewport(el)) {
       return
     }
-
     const percentageInViewport = getScrollPercentage(el)
-    const pixelsOverflowing = config.elementSpecs[i]['pixelsOverflowing']
 
-    let pixelIncrementsToMove =
-      (window.pageYOffset -
-        config.elementSpecs[i]['offsetTop'] +
-        window.innerHeight) *
-      config.speedRatio
+    const pixelsToMoveBasedOnLeastPixelsOverflowing =
+      percentageInViewport *
+      config.smallestPixelsOverFlowing *
+      config.speedRatio *
+      1.5
 
-    // mode of operation if amount of image overflowing is less than
-    // pixels left to scroll in the document
-    if (config.modeToMove[i] === 'safety') {
-      pixelIncrementsToMove =
-        percentageInViewport * pixelsOverflowing * config.speedRatio
-    }
-
-    el.style.backgroundPosition = `${
-      config.defaultXPosition
-    } -${pixelIncrementsToMove}px`
+    el.style.backgroundPosition = `0 -${pixelsToMoveBasedOnLeastPixelsOverflowing}px`
   })
 }

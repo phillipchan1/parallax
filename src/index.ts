@@ -7,6 +7,8 @@ var parallaxElements = document.querySelectorAll('.parallax')
 
 window.onload = function() {
   var config = initAndGetConfig(parallaxElements)
+
+  // first set it
   doParallaxEffect(parallaxElements, config)
 
   window.addEventListener('scroll', () => {
