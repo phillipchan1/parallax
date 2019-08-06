@@ -3,6 +3,8 @@ import * as offset from 'document-offset'
 import { getBackgroundImageURLFromElement } from './lib/getBackgroundImageURLfromElement'
 import { getImageSize } from './lib/getImageSize'
 import { config } from './config'
+import { getPixelsOverflowing } from './lib/getPixelsOverflowing'
+
 import { Config } from './types/Config'
 
 /*
@@ -26,8 +28,9 @@ export const initAndGetConfig = (elements: NodeList): Config => {
     const url = getBackgroundImageURLFromElement(el)
     const imageSize = getImageSize(url)
     const boundingClientRect = el.getBoundingClientRect()
-    const elementHeight = boundingClientRect.height
-    const pixelsOverflowing = imageSize.height - elementHeight
+    const pixelsOverflowing = getPixelsOverflowing(
+      boundingClientRect,
+      imageSize
 
     elementsPixelsOverflowing.push(pixelsOverflowing)
     const elementOffset = offset(el)
@@ -40,6 +43,8 @@ export const initAndGetConfig = (elements: NodeList): Config => {
   })
 
   const smallestPixelsOverFlowing = Math.min(...elementsPixelsOverflowing)
+  console.log(`TCL: smallestPixelsOverFlowing`, smallestPixelsOverFlowing)
+  console.log(elementsPixelsOverflowing)
 
   return {
     ...config,
