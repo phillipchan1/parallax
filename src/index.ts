@@ -9,6 +9,7 @@ class Parallax {
   constructor(userSetConfig) {
     window.onload = function() {
       var config = initAndGetConfig(parallaxElements, userSetConfig)
+      console.log(`TCL: window.onload -> config`, config)
 
       // first set it
       doParallaxEffect(parallaxElements, config)

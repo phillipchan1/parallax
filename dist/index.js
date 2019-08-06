@@ -195,7 +195,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexport
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar _ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\nvar initAndGetConfig_1 = __webpack_require__(/*! ./initAndGetConfig */ \"./src/initAndGetConfig.ts\");\nvar doParallaxEffect_1 = __webpack_require__(/*! ./lib/doParallaxEffect */ \"./src/lib/doParallaxEffect.ts\");\nvar parallaxElements = document.querySelectorAll('.parallax');\nvar Parallax = /** @class */ (function () {\n    function Parallax(userSetConfig) {\n        window.onload = function () {\n            var config = initAndGetConfig_1.initAndGetConfig(parallaxElements, userSetConfig);\n            // first set it\n            doParallaxEffect_1.doParallaxEffect(parallaxElements, config);\n            window.addEventListener('scroll', function () {\n                doParallaxEffect_1.doParallaxEffect(parallaxElements, config);\n            });\n            window.addEventListener('resize', _.debounce(function () {\n                config = initAndGetConfig_1.initAndGetConfig(parallaxElements, userSetConfig);\n                doParallaxEffect_1.doParallaxEffect(parallaxElements, config);\n            }, 500));\n        };\n    }\n    return Parallax;\n}());\nmodule.exports = Parallax;\n\n\n//# sourceURL=webpack://Parallax/./src/index.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar _ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\nvar initAndGetConfig_1 = __webpack_require__(/*! ./initAndGetConfig */ \"./src/initAndGetConfig.ts\");\nvar doParallaxEffect_1 = __webpack_require__(/*! ./lib/doParallaxEffect */ \"./src/lib/doParallaxEffect.ts\");\nvar parallaxElements = document.querySelectorAll('.parallax');\nvar Parallax = /** @class */ (function () {\n    function Parallax(userSetConfig) {\n        window.onload = function () {\n            var config = initAndGetConfig_1.initAndGetConfig(parallaxElements, userSetConfig);\n            console.log(\"TCL: window.onload -> config\", config);\n            // first set it\n            doParallaxEffect_1.doParallaxEffect(parallaxElements, config);\n            window.addEventListener('scroll', function () {\n                doParallaxEffect_1.doParallaxEffect(parallaxElements, config);\n            });\n            window.addEventListener('resize', _.debounce(function () {\n                config = initAndGetConfig_1.initAndGetConfig(parallaxElements, userSetConfig);\n                doParallaxEffect_1.doParallaxEffect(parallaxElements, config);\n            }, 500));\n        };\n    }\n    return Parallax;\n}());\nmodule.exports = Parallax;\n\n\n//# sourceURL=webpack://Parallax/./src/index.ts?");
 
 /***/ }),
 
@@ -207,7 +207,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar _ 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = Object.assign || function(t) {\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\n            s = arguments[i];\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\n                t[p] = s[p];\n        }\n        return t;\n    };\n    return __assign.apply(this, arguments);\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar offset = __webpack_require__(/*! document-offset */ \"./node_modules/document-offset/index.js\");\nvar config_1 = __webpack_require__(/*! ./config */ \"./src/config.ts\");\nvar isImageOverflowSmallerThanAllowed_1 = __webpack_require__(/*! ./lib/isImageOverflowSmallerThanAllowed */ \"./src/lib/isImageOverflowSmallerThanAllowed.ts\");\n/*\n * initAndGetConfig\n * This module is broken up into 3 phases–\n * before looping elements, looping elements,\n * and finally post processing after looping.\n *\n * It will return a config file with information\n * about the elements.\n *\n */\nexports.initAndGetConfig = function (elements, userSetConfig) {\n    // create new config object with user defined configs\n    var setConfig = __assign({}, config_1.config, userSetConfig);\n    var elementSpecs = [];\n    elements.forEach(function (el, i) {\n        var boundingClientRect = el.getBoundingClientRect();\n        var elementOffset = offset(el);\n        if (isImageOverflowSmallerThanAllowed_1.isImageOverflowSmallerThanAllowed(el, setConfig)) {\n            el.style.backgroundSize = \"100% \" + (boundingClientRect.height +\n                setConfig.pixelsOverflowing) + \"px\";\n        }\n        el.style.backgroundPosition = setConfig.defaultXPosition + \" 0px\";\n        elementSpecs[i] = {\n            offsetTop: elementOffset.top\n        };\n    });\n    return __assign({}, setConfig, { elementSpecs: elementSpecs });\n};\n\n\n//# sourceURL=webpack://Parallax/./src/initAndGetConfig.ts?");
+eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = Object.assign || function(t) {\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\n            s = arguments[i];\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\n                t[p] = s[p];\n        }\n        return t;\n    };\n    return __assign.apply(this, arguments);\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar offset = __webpack_require__(/*! document-offset */ \"./node_modules/document-offset/index.js\");\nvar config_1 = __webpack_require__(/*! ./config */ \"./src/config.ts\");\nvar mergeConfig_1 = __webpack_require__(/*! ./lib/mergeConfig */ \"./src/lib/mergeConfig.ts\");\nvar isImageOverflowSmallerThanAllowed_1 = __webpack_require__(/*! ./lib/isImageOverflowSmallerThanAllowed */ \"./src/lib/isImageOverflowSmallerThanAllowed.ts\");\n/*\n * initAndGetConfig\n * This module is broken up into 3 phases–\n * before looping elements, looping elements,\n * and finally post processing after looping.\n *\n * It will return a config file with information\n * about the elements.\n *\n */\nexports.initAndGetConfig = function (elements, userSetConfig) {\n    // create new config object with user defined config\n    var setConfig = mergeConfig_1.mergeConfig(config_1.config, userSetConfig);\n    var elementSpecs = [];\n    elements.forEach(function (el, i) {\n        var boundingClientRect = el.getBoundingClientRect();\n        var elementOffset = offset(el);\n        if (isImageOverflowSmallerThanAllowed_1.isImageOverflowSmallerThanAllowed(el, setConfig)) {\n            el.style.backgroundSize = \"100% \" + (boundingClientRect.height +\n                setConfig.pixelsOverflowing) + \"px\";\n        }\n        el.style.backgroundPosition = setConfig.defaultXPosition + \" 0px\";\n        elementSpecs[i] = {\n            offsetTop: elementOffset.top\n        };\n    });\n    return __assign({}, setConfig, { elementSpecs: elementSpecs });\n};\n\n\n//# sourceURL=webpack://Parallax/./src/initAndGetConfig.ts?");
 
 /***/ }),
 
@@ -271,6 +271,18 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar of
 
 /***/ }),
 
+/***/ "./src/lib/getSpeedLimit.ts":
+/*!**********************************!*\
+  !*** ./src/lib/getSpeedLimit.ts ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.getSpeedLimit = function (speed) {\n    if (speed < 0.1) {\n        return 0.1;\n    }\n    if (speed > 1) {\n        return 1;\n    }\n    return speed;\n};\n\n\n//# sourceURL=webpack://Parallax/./src/lib/getSpeedLimit.ts?");
+
+/***/ }),
+
 /***/ "./src/lib/isImageOverflowSmallerThanAllowed.ts":
 /*!******************************************************!*\
   !*** ./src/lib/isImageOverflowSmallerThanAllowed.ts ***!
@@ -292,6 +304,18 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ge
 
 "use strict";
 eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.isInViewport = function (el) {\n    var r, html;\n    if (!el || 1 !== el.nodeType) {\n        return false;\n    }\n    html = document.documentElement;\n    r = el.getBoundingClientRect();\n    return (!!r &&\n        r.bottom >= 0 &&\n        r.right >= 0 &&\n        r.top <= html.clientHeight &&\n        r.left <= html.clientWidth);\n};\n\n\n//# sourceURL=webpack://Parallax/./src/lib/isInViewport.ts?");
+
+/***/ }),
+
+/***/ "./src/lib/mergeConfig.ts":
+/*!********************************!*\
+  !*** ./src/lib/mergeConfig.ts ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = Object.assign || function(t) {\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\n            s = arguments[i];\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\n                t[p] = s[p];\n        }\n        return t;\n    };\n    return __assign.apply(this, arguments);\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar getSpeedLimit_1 = __webpack_require__(/*! ./getSpeedLimit */ \"./src/lib/getSpeedLimit.ts\");\nexports.mergeConfig = function (presetConfig, userConfig) {\n    return __assign({}, presetConfig, userConfig, { speedRatio: getSpeedLimit_1.getSpeedLimit(userConfig.speedRatio) });\n};\n\n\n//# sourceURL=webpack://Parallax/./src/lib/mergeConfig.ts?");
 
 /***/ })
 

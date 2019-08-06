@@ -1,9 +1,7 @@
 import * as offset from 'document-offset'
 
-import { getBackgroundImageURLFromElement } from './lib/getBackgroundImageURLfromElement'
-import { getImageSize } from './lib/getImageSize'
 import { config } from './config'
-import { getPixelsOverflowing } from './lib/getPixelsOverflowing'
+import { mergeConfig } from './lib/mergeConfig'
 import { isImageOverflowSmallerThanAllowed } from './lib/isImageOverflowSmallerThanAllowed'
 
 import { Config } from './types/Config'
@@ -23,9 +21,9 @@ export const initAndGetConfig = (
   elements: NodeList,
   userSetConfig: Config
 ): Config => {
-  // create new config object with user defined configs
+  // create new config object with user defined config
+  const setConfig = mergeConfig(config, userSetConfig)
 
-  const setConfig = { ...config, ...userSetConfig }
   var elementSpecs = []
 
   elements.forEach((el: HTMLElement, i) => {
