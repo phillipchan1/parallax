@@ -19,19 +19,25 @@ import { Config } from './types/Config'
  *
  */
 
-export const initAndGetConfig = (elements: NodeList): Config => {
+export const initAndGetConfig = (
+  elements: NodeList,
+  userSetConfig: Config
+): Config => {
+  // create new config object with user defined configs
+
+  const setConfig = { ...config, ...userSetConfig }
   var elementSpecs = []
 
   elements.forEach((el: HTMLElement, i) => {
     const boundingClientRect = el.getBoundingClientRect()
     const elementOffset = offset(el)
 
-    if (isImageOverflowSmallerThanAllowed(el, config)) {
+    if (isImageOverflowSmallerThanAllowed(el, setConfig)) {
       el.style.backgroundSize = `100% ${boundingClientRect.height +
-        config.pixelsOverflowing}px`
+        setConfig.pixelsOverflowing}px`
     }
 
-    el.style.backgroundPosition = `${config.defaultXPosition} 0px`
+    el.style.backgroundPosition = `${setConfig.defaultXPosition} 0px`
 
     elementSpecs[i] = {
       offsetTop: elementOffset.top
@@ -39,7 +45,7 @@ export const initAndGetConfig = (elements: NodeList): Config => {
   })
 
   return {
-    ...config,
+    ...setConfig,
     elementSpecs
   }
 }

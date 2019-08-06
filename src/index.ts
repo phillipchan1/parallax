@@ -5,22 +5,27 @@ import { doParallaxEffect } from './lib/doParallaxEffect'
 
 var parallaxElements = document.querySelectorAll('.parallax')
 
-window.onload = function() {
-  var config = initAndGetConfig(parallaxElements)
-  console.log(`TCL: window.onload -> config`, config)
+class Parallax {
+  constructor(userSetConfig) {
+    window.onload = function() {
+      var config = initAndGetConfig(parallaxElements, userSetConfig)
 
-  // first set it
-  doParallaxEffect(parallaxElements, config)
-
-  window.addEventListener('scroll', () => {
-    doParallaxEffect(parallaxElements, config)
-  })
-
-  window.addEventListener(
-    'resize',
-    _.debounce(() => {
-      config = initAndGetConfig(parallaxElements)
+      // first set it
       doParallaxEffect(parallaxElements, config)
-    }, 500)
-  )
+
+      window.addEventListener('scroll', () => {
+        doParallaxEffect(parallaxElements, config)
+      })
+
+      window.addEventListener(
+        'resize',
+        _.debounce(() => {
+          config = initAndGetConfig(parallaxElements, userSetConfig)
+          doParallaxEffect(parallaxElements, config)
+        }, 500)
+      )
+    }
+  }
 }
+
+module.exports = Parallax
