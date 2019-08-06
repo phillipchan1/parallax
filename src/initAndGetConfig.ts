@@ -4,6 +4,7 @@ import { getBackgroundImageURLFromElement } from './lib/getBackgroundImageURLfro
 import { getImageSize } from './lib/getImageSize'
 import { config } from './config'
 import { getPixelsOverflowing } from './lib/getPixelsOverflowing'
+import { isImageOverflowSmallerThanAllowed } from './lib/isImageOverflowSmallerThanAllowed'
 
 import { Config } from './types/Config'
 
@@ -20,31 +21,19 @@ import { Config } from './types/Config'
 
 export const initAndGetConfig = (elements: NodeList): Config => {
   var elementSpecs = []
-  var elementsPixelsOverflowing = []
 
   elements.forEach((el: HTMLElement, i) => {
-    el.style.backgroundPosition = `${config.defaultXPosition} 0px`
-
-    const url = getBackgroundImageURLFromElement(el)
-
-    const imageSize = getImageSize(url)
     const boundingClientRect = el.getBoundingClientRect()
-    const pixelsOverflowing = getPixelsOverflowing(
-      boundingClientRect,
-      imageSize
-    )
+    const elementOffset = offset(el)
 
-    if (pixelsOverflowing < config.pixelsOverflowing) {
+    if (isImageOverflowSmallerThanAllowed(el, config)) {
       el.style.backgroundSize = `100% ${boundingClientRect.height +
         config.pixelsOverflowing}px`
     }
 
-    elementsPixelsOverflowing.push(pixelsOverflowing)
-    const elementOffset = offset(el)
+    el.style.backgroundPosition = `${config.defaultXPosition} 0px`
 
     elementSpecs[i] = {
-      ...imageSize,
-      pixelsOverflowing,
       offsetTop: elementOffset.top
     }
   })
