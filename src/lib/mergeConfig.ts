@@ -5,9 +5,13 @@ export const mergeConfig = (
   presetConfig: Config,
   userConfig: Config
 ): Config => {
+  const safeGuardedUserConfig = {
+    ...userConfig,
+    speedRatio: getSpeedLimit(userConfig.speedRatio || presetConfig.speedRatio)
+  }
+
   return {
     ...presetConfig,
-    ...userConfig,
-    speedRatio: getSpeedLimit(userConfig.speedRatio)
+    ...safeGuardedUserConfig
   }
 }

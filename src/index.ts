@@ -6,9 +6,10 @@ import { doParallaxEffect } from './lib/doParallaxEffect'
 var parallaxElements = document.querySelectorAll('.parallax')
 
 class Parallax {
-  constructor(userSetConfig) {
+  constructor(userSetConfig = {}) {
     window.onload = function() {
       var config = initAndGetConfig(parallaxElements, userSetConfig)
+      console.log(`TCL: window.onload -> config`, config)
 
       // first set it
       doParallaxEffect(parallaxElements, config)

@@ -19,7 +19,7 @@ import { Config } from './types/Config'
 
 export const initAndGetConfig = (
   elements: NodeList,
-  userSetConfig: Config
+  userSetConfig: any
 ): Config => {
   // create new config object with user defined config
   const setConfig = mergeConfig(config, userSetConfig)
