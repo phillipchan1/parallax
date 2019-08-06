@@ -3,6 +3,6 @@ import { ElementSpecs } from './ElementSpecs'
 export type Config = {
   defaultXPosition: string
   elementSpecs?: ElementSpecs[]
-  smallestPixelsOverFlowing?: number
+  pixelsOverflowing?: number
   speedRatio: number
 }

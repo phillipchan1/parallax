@@ -26,11 +26,18 @@ export const initAndGetConfig = (elements: NodeList): Config => {
     el.style.backgroundPosition = `${config.defaultXPosition} 0px`
 
     const url = getBackgroundImageURLFromElement(el)
+
     const imageSize = getImageSize(url)
     const boundingClientRect = el.getBoundingClientRect()
     const pixelsOverflowing = getPixelsOverflowing(
       boundingClientRect,
       imageSize
+    )
+
+    if (pixelsOverflowing < config.pixelsOverflowing) {
+      el.style.backgroundSize = `100% ${boundingClientRect.height +
+        config.pixelsOverflowing}px`
+    }
 
     elementsPixelsOverflowing.push(pixelsOverflowing)
     const elementOffset = offset(el)
@@ -42,13 +49,8 @@ export const initAndGetConfig = (elements: NodeList): Config => {
     }
   })
 
-  const smallestPixelsOverFlowing = Math.min(...elementsPixelsOverflowing)
-  console.log(`TCL: smallestPixelsOverFlowing`, smallestPixelsOverFlowing)
-  console.log(elementsPixelsOverflowing)
-
   return {
     ...config,
-    elementSpecs,
-    smallestPixelsOverFlowing
+    elementSpecs
   }
 }

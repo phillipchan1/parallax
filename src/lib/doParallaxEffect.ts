@@ -10,10 +10,7 @@ export const doParallaxEffect = (elements: NodeList, config: any): void => {
     const percentageInViewport = getScrollPercentage(el)
 
     const pixelsToMoveBasedOnLeastPixelsOverflowing =
-      percentageInViewport *
-      config.smallestPixelsOverFlowing *
-      config.speedRatio *
-      1.5
+      percentageInViewport * config.pixelsOverflowing * config.speedRatio
 
     el.style.backgroundPosition = `0 -${pixelsToMoveBasedOnLeastPixelsOverflowing}px`
   })
