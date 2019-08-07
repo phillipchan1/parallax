@@ -1,4 +1,5 @@
-import * as _ from 'lodash'
+// import * as _ from 'lodash'
+import debounce from 'lodash/debounce'
 
 import { initAndGetConfig } from './initAndGetConfig'
 import { doParallaxEffect } from './lib/doParallaxEffect'
@@ -20,7 +21,7 @@ class Parallax {
 
       window.addEventListener(
         'resize',
-        _.debounce(() => {
+        debounce(() => {
           config = initAndGetConfig(parallaxElements, userSetConfig)
           doParallaxEffect(parallaxElements, config)
         }, 500)
