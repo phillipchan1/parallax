@@ -5,7 +5,9 @@
   "keywords": [
     "parallax",
     "plugin",
-    "vanillajs"
+    "vanillajs",
+    "typescript",
+    "es6"
   ],
   "main": "dist/index.js",
   "scripts": {
