@@ -12,8 +12,10 @@ class Parallax {
       var config = initAndGetConfig(parallaxElements, userSetConfig)
       console.log(`TCL: window.onload -> config`, config)
 
-      // first set it
-      // doParallaxEffect(parallaxElements, config)
+      // initially do it if already scrolled
+      if (window.pageYOffset > config.pageOffsetToInitialize) {
+        doParallaxEffect(parallaxElements, config)
+      }
 
       window.addEventListener('scroll', () => {
         doParallaxEffect(parallaxElements, config)

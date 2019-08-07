@@ -3,6 +3,7 @@ import * as offset from 'document-offset'
 import { config } from './config'
 import { mergeConfig } from './lib/mergeConfig'
 import { isImageOverflowSmallerThanAllowed } from './lib/isImageOverflowSmallerThanAllowed'
+import { getScrollPercentage } from './lib/getScrollPercentage'
 
 import { Config } from './types/Config'
 
@@ -29,6 +30,7 @@ export const initAndGetConfig = (
   elements.forEach((el: HTMLElement, i) => {
     const boundingClientRect = el.getBoundingClientRect()
     const elementOffset = offset(el)
+    const initialPercentageInViewport = getScrollPercentage(el)
 
     if (isImageOverflowSmallerThanAllowed(el, setConfig)) {
       el.style.backgroundSize = `100% ${boundingClientRect.height +
@@ -38,7 +40,8 @@ export const initAndGetConfig = (
     el.style.backgroundPosition = `${setConfig.defaultXPosition} 0px`
 
     elementSpecs[i] = {
-      offsetTop: elementOffset.top
+      offsetTop: elementOffset.top,
+      initialPercentageInViewport
     }
   })
 
