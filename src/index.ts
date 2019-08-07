@@ -13,7 +13,7 @@ class Parallax {
       console.log(`TCL: window.onload -> config`, config)
 
       // first set it
-      doParallaxEffect(parallaxElements, config)
+      // doParallaxEffect(parallaxElements, config)
 
       window.addEventListener('scroll', () => {
         doParallaxEffect(parallaxElements, config)
