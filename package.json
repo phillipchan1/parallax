@@ -2,6 +2,11 @@
   "name": "hero-parallax",
   "version": "1.0.1",
   "description": "",
+  "keywords": [
+    "parallax",
+    "plugin",
+    "vanillajs"
+  ],
   "main": "dist/index.js",
   "scripts": {
     "dev": "webpack --mode development",
