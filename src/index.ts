@@ -10,7 +10,6 @@ class Parallax {
   constructor(userSetConfig = {}) {
     window.onload = function() {
       var config = initAndGetConfig(parallaxElements, userSetConfig)
-      console.log(`TCL: window.onload -> config`, config)
 
       // initially do it if already scrolled
       if (window.pageYOffset > config.pageOffsetToInitialize) {
