@@ -10,12 +10,8 @@ export const doParallaxEffect = (elements: NodeList, config: any): void => {
 
     let percentageInViewport = getScrollPercentage(el)
 
-    // to avoid initial jump on load, let the first element's percentage
-    // be calibrated
-    if (i === 0 && window.pageYOffset < config.pageOffsetToInitialize) {
-      percentageInViewport =
-        getScrollPercentage(el) -
-        config.elementSpecs[i].initialPercentageInViewport
+    if (config.debugMode) {
+      console.log(`${i}: percentageInViewport`, percentageInViewport)
     }
 
     const pixelsToMoveBasedOnPercentageInViewPort =

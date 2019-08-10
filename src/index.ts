@@ -1,32 +1,39 @@
 // import * as _ from 'lodash'
-import debounce from 'lodash/debounce'
+import * as debounce from 'lodash/debounce'
 
 import { initAndGetConfig } from './initAndGetConfig'
 import { doParallaxEffect } from './lib/doParallaxEffect'
 
-var parallaxElements = document.querySelectorAll('.parallax')
+const parallaxElements = document.querySelectorAll('.parallax')
 
-const Parallax = function (userSetConfig) {
-  window.onload = function() {
+class Parallax {
+  constructor(userSetConfig) {
+    // set parallax config before image loads to avoid jumping
     var config = initAndGetConfig(parallaxElements, userSetConfig)
+    doParallaxEffect(parallaxElements, config)
 
-    // initially do it if already scrolled
-    if (window.pageYOffset > config.pageOffsetToInitialize) {
+    window.onload = function() {
+      config = initAndGetConfig(parallaxElements, userSetConfig)
+
+      if (config.debugMode) {
+        console.log(`TCL: window.onload -> config`, config)
+      }
+
       doParallaxEffect(parallaxElements, config)
-    }
 
-    window.addEventListener('scroll', () => {
-      doParallaxEffect(parallaxElements, config)
-    })
-
-    window.addEventListener(
-      'resize',
-      debounce(() => {
-        config = initAndGetConfig(parallaxElements, userSetConfig)
+      window.addEventListener('scroll', () => {
         doParallaxEffect(parallaxElements, config)
-      }, 500)
-    )
+      })
+
+      window.addEventListener(
+        'resize',
+        debounce(() => {
+          config = initAndGetConfig(parallaxElements, userSetConfig)
+          doParallaxEffect(parallaxElements, config)
+        }, 500)
+      )
+    }
   }
-})
+}
 
 module.exports = Parallax
