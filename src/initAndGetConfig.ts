@@ -1,7 +1,7 @@
 import * as offset from 'document-offset'
 
 import { config } from './config'
-import { mergeConfig } from './lib/mergeConfig'
+
 import { isImageOverflowSmallerThanAllowed } from './lib/isImageOverflowSmallerThanAllowed'
 import { getScrollPercentage } from './lib/getScrollPercentage'
 
@@ -20,10 +20,9 @@ import { Config } from './types/Config'
 
 export const initAndGetConfig = (
   elements: NodeList,
-  userSetConfig: any
+  config: Config
 ): Config => {
   // create new config object with user defined config
-  const setConfig = mergeConfig(config, userSetConfig)
 
   var elementSpecs = []
 
@@ -32,12 +31,12 @@ export const initAndGetConfig = (
     const elementOffset = offset(el)
     const initialPercentageInViewport = getScrollPercentage(el)
 
-    if (isImageOverflowSmallerThanAllowed(el, setConfig)) {
+    if (isImageOverflowSmallerThanAllowed(el, config)) {
       el.style.backgroundSize = `100% ${boundingClientRect.height +
-        setConfig.pixelsOverflowing}px`
+        config.pixelsOverflowing}px`
     }
 
-    el.style.backgroundPosition = `${setConfig.defaultXPosition} 0px`
+    el.style.backgroundPosition = `${config.defaultXPosition} 0px`
 
     elementSpecs[i] = {
       offsetTop: elementOffset.top,
@@ -46,7 +45,7 @@ export const initAndGetConfig = (
   })
 
   return {
-    ...setConfig,
+    ...config,
     elementSpecs
   }
 }

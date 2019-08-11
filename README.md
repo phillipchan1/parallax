@@ -40,7 +40,9 @@ You can optionally pass in a configuration option
 
 ### Options
 
-| Option              |   Type   |                                                                                Description |
-| ------------------- | :------: | -----------------------------------------------------------------------------------------: |
-| `speedRatio`        | `number` | A speed modifier to control the speed of the parallax effect. [A number between 0.1 and 1] |
-| `pixelsOverflowing` | `number` |                                         The amount of pixels each parallax element scrolls |
+| Option              |   Type    |                                                                                Description |
+| ------------------- | :-------: | -----------------------------------------------------------------------------------------: |
+| `speedRatio`        | `number`  | A speed modifier to control the speed of the parallax effect. [A number between 0.1 and 1] |
+| `pixelsOverflowing` | `number`  |                                         The amount of pixels each parallax element scrolls |
+| `selector`          | `string`  |                                      The class selector to use to target parallax elements |
+| `debugMode`         | `boolean` |                                                Whether to show debug statements in the log |

@@ -1,19 +1,23 @@
 // import * as _ from 'lodash'
 import * as debounce from 'lodash/debounce'
 
+import { config } from './config'
+import { mergeConfig } from './lib/mergeConfig'
 import { initAndGetConfig } from './initAndGetConfig'
 import { doParallaxEffect } from './lib/doParallaxEffect'
 
-const parallaxElements = document.querySelectorAll('.parallax')
-
 class Parallax {
   constructor(userSetConfig) {
+    const setConfig = mergeConfig(config, userSetConfig)
+
+    const parallaxElements = document.querySelectorAll(setConfig.selector)
+
     // set parallax config before image loads to avoid jumping
-    var config = initAndGetConfig(parallaxElements, userSetConfig)
+    var specs = initAndGetConfig(parallaxElements, setConfig)
     doParallaxEffect(parallaxElements, config)
 
     window.onload = function() {
-      config = initAndGetConfig(parallaxElements, userSetConfig)
+      specs = initAndGetConfig(parallaxElements, setConfig)
 
       if (config.debugMode) {
         console.log(`TCL: window.onload -> config`, config)
@@ -28,7 +32,7 @@ class Parallax {
       window.addEventListener(
         'resize',
         debounce(() => {
-          config = initAndGetConfig(parallaxElements, userSetConfig)
+          specs = initAndGetConfig(parallaxElements, setConfig)
           doParallaxEffect(parallaxElements, config)
         }, 500)
       )

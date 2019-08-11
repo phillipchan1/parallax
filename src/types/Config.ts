@@ -6,5 +6,6 @@ export type Config = {
   elementSpecs?: ElementSpecs[]
   pageOffsetToInitialize?: number
   pixelsOverflowing?: number
+  selector: string
   speedRatio: number
 }
