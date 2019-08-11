@@ -1,3 +1,5 @@
+@import '../dist/main.css';
+
 .full-width {
   background: black;
   height: 80vh;
@@ -13,11 +15,4 @@
 
 .parallax-container {
   padding: 5em 0;
-}
-
-/* plugin styles */
-.parallax {
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  /* margin: 5em 0; */
 }
