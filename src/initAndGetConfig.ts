@@ -1,9 +1,8 @@
 import * as offset from 'document-offset'
 
-import { config } from './config'
-
 import { isImageOverflowSmallerThanAllowed } from './lib/isImageOverflowSmallerThanAllowed'
 import { getScrollPercentage } from './lib/getScrollPercentage'
+import { setStylesOnElement } from './lib/setStylesOnElement'
 
 import { Config } from './types/Config'
 
@@ -34,11 +33,14 @@ export const initAndGetConfig = (
 
     if (isImageOverflowSmallerThanAllowed(el, config)) {
       el.style.backgroundSize = `${boundingClientRect.width +
-        config.pixelsOverflowing}px} ${boundingClientRect.height +
+        config.pixelsOverflowing}px ${boundingClientRect.height +
         config.pixelsOverflowing}px`
 
       imageIsOverflowingSmallerThanAllowed = true
     }
+
+    // set generic styles
+    setStylesOnElement(el)
 
     el.style.backgroundPosition = `${config.defaultXPosition} 0px`
 

@@ -16,6 +16,8 @@ export const doParallaxEffect = (elements: NodeList, config: any): void => {
     const pixelsToMoveBasedOnPercentageInViewPort =
       percentageInViewport * config.pixelsOverflowing * config.speedRatio
 
-    el.style.backgroundPosition = `0 -${pixelsToMoveBasedOnPercentageInViewPort}px`
+    el.style.backgroundPosition = `${
+      config.defaultXPosition
+    } -${pixelsToMoveBasedOnPercentageInViewPort}px`
   })
 }
