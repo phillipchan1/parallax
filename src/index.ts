@@ -19,21 +19,21 @@ class Parallax {
     window.onload = function() {
       specs = initAndGetConfig(parallaxElements, setConfig)
 
-      if (config.debugMode) {
-        console.log(`TCL: window.onload -> config`, config)
+      if (specs.debugMode) {
+        console.log(`TCL: window.onload -> config`, specs)
       }
 
       doParallaxEffect(parallaxElements, config)
 
       window.addEventListener('scroll', () => {
-        doParallaxEffect(parallaxElements, config)
+        doParallaxEffect(parallaxElements, specs)
       })
 
       window.addEventListener(
         'resize',
         debounce(() => {
           specs = initAndGetConfig(parallaxElements, setConfig)
-          doParallaxEffect(parallaxElements, config)
+          doParallaxEffect(parallaxElements, specs)
         }, 500)
       )
     }

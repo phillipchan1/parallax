@@ -1,6 +1,5 @@
 import { isInViewport } from './isInViewport'
 import { getScrollPercentage } from './getScrollPercentage'
-import { config } from '../config'
 
 export const doParallaxEffect = (elements: NodeList, config: any): void => {
   elements.forEach((el: HTMLElement, i: number) => {
