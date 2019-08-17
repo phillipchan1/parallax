@@ -34,6 +34,10 @@ class Parallax {
         debounce(() => {
           specs = initAndGetConfig(parallaxElements, setConfig)
           doParallaxEffect(parallaxElements, specs)
+
+          if (specs.debugMode) {
+            console.log(`TCL: window.onload -> config`, specs)
+          }
         }, 500)
       )
     }
