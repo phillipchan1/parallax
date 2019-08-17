@@ -31,13 +31,13 @@ export const initAndGetConfig = (
     const initialPercentageInViewport = getScrollPercentage(el)
     let imageIsOverflowingSmallerThanAllowed = false
 
-    if (isImageOverflowSmallerThanAllowed(el, config)) {
-      el.style.backgroundSize = `${boundingClientRect.width +
-        config.pixelsOverflowing}px ${boundingClientRect.height +
-        config.pixelsOverflowing}px`
+    // if (isImageOverflowSmallerThanAllowed(el, config)) {
+    el.style.backgroundSize = `${boundingClientRect.width +
+      config.pixelsOverflowing}px ${boundingClientRect.height +
+      config.pixelsOverflowing}px`
 
-      imageIsOverflowingSmallerThanAllowed = true
-    }
+    imageIsOverflowingSmallerThanAllowed = true
+    // }
 
     // set generic styles
     setStylesOnElement(el)

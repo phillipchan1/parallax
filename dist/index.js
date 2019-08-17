@@ -317,7 +317,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\n// imp
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = Object.assign || function(t) {\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\n            s = arguments[i];\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\n                t[p] = s[p];\n        }\n        return t;\n    };\n    return __assign.apply(this, arguments);\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar offset = __webpack_require__(/*! document-offset */ \"./node_modules/document-offset/index.js\");\nvar isImageOverflowSmallerThanAllowed_1 = __webpack_require__(/*! ./lib/isImageOverflowSmallerThanAllowed */ \"./src/lib/isImageOverflowSmallerThanAllowed.ts\");\nvar getScrollPercentage_1 = __webpack_require__(/*! ./lib/getScrollPercentage */ \"./src/lib/getScrollPercentage.ts\");\nvar setStylesOnElement_1 = __webpack_require__(/*! ./lib/setStylesOnElement */ \"./src/lib/setStylesOnElement.ts\");\n/*\n * initAndGetConfig\n * This module is broken up into 3 phases–\n * before looping elements, looping elements,\n * and finally post processing after looping.\n *\n * It will return a config file with information\n * about the elements.\n *\n */\nexports.initAndGetConfig = function (elements, config) {\n    // create new config object with user defined config\n    var elementSpecs = [];\n    elements.forEach(function (el, i) {\n        var boundingClientRect = el.getBoundingClientRect();\n        var elementOffset = offset(el);\n        var initialPercentageInViewport = getScrollPercentage_1.getScrollPercentage(el);\n        var imageIsOverflowingSmallerThanAllowed = false;\n        if (isImageOverflowSmallerThanAllowed_1.isImageOverflowSmallerThanAllowed(el, config)) {\n            el.style.backgroundSize = boundingClientRect.width +\n                config.pixelsOverflowing + \"px \" + (boundingClientRect.height +\n                config.pixelsOverflowing) + \"px\";\n            imageIsOverflowingSmallerThanAllowed = true;\n        }\n        // set generic styles\n        setStylesOnElement_1.setStylesOnElement(el);\n        el.style.backgroundPosition = config.defaultXPosition + \" 0px\";\n        elementSpecs[i] = {\n            offsetTop: elementOffset.top,\n            initialPercentageInViewport: initialPercentageInViewport,\n            imageIsOverflowingSmallerThanAllowed: imageIsOverflowingSmallerThanAllowed\n        };\n    });\n    return __assign({}, config, { elementSpecs: elementSpecs });\n};\n\n\n//# sourceURL=webpack://Parallax/./src/initAndGetConfig.ts?");
+eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = Object.assign || function(t) {\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\n            s = arguments[i];\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\n                t[p] = s[p];\n        }\n        return t;\n    };\n    return __assign.apply(this, arguments);\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar offset = __webpack_require__(/*! document-offset */ \"./node_modules/document-offset/index.js\");\nvar getScrollPercentage_1 = __webpack_require__(/*! ./lib/getScrollPercentage */ \"./src/lib/getScrollPercentage.ts\");\nvar setStylesOnElement_1 = __webpack_require__(/*! ./lib/setStylesOnElement */ \"./src/lib/setStylesOnElement.ts\");\n/*\n * initAndGetConfig\n * This module is broken up into 3 phases–\n * before looping elements, looping elements,\n * and finally post processing after looping.\n *\n * It will return a config file with information\n * about the elements.\n *\n */\nexports.initAndGetConfig = function (elements, config) {\n    // create new config object with user defined config\n    var elementSpecs = [];\n    elements.forEach(function (el, i) {\n        var boundingClientRect = el.getBoundingClientRect();\n        var elementOffset = offset(el);\n        var initialPercentageInViewport = getScrollPercentage_1.getScrollPercentage(el);\n        var imageIsOverflowingSmallerThanAllowed = false;\n        // if (isImageOverflowSmallerThanAllowed(el, config)) {\n        el.style.backgroundSize = boundingClientRect.width +\n            config.pixelsOverflowing + \"px \" + (boundingClientRect.height +\n            config.pixelsOverflowing) + \"px\";\n        imageIsOverflowingSmallerThanAllowed = true;\n        // }\n        // set generic styles\n        setStylesOnElement_1.setStylesOnElement(el);\n        el.style.backgroundPosition = config.defaultXPosition + \" 0px\";\n        elementSpecs[i] = {\n            offsetTop: elementOffset.top,\n            initialPercentageInViewport: initialPercentageInViewport,\n            imageIsOverflowingSmallerThanAllowed: imageIsOverflowingSmallerThanAllowed\n        };\n    });\n    return __assign({}, config, { elementSpecs: elementSpecs });\n};\n\n\n//# sourceURL=webpack://Parallax/./src/initAndGetConfig.ts?");
 
 /***/ }),
 
@@ -330,42 +330,6 @@ eval("\nvar __assign = (this && this.__assign) || function () {\n    __assign = 
 
 "use strict";
 eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar isInViewport_1 = __webpack_require__(/*! ./isInViewport */ \"./src/lib/isInViewport.ts\");\nvar getScrollPercentage_1 = __webpack_require__(/*! ./getScrollPercentage */ \"./src/lib/getScrollPercentage.ts\");\nexports.doParallaxEffect = function (elements, config) {\n    elements.forEach(function (el, i) {\n        if (!isInViewport_1.isInViewport(el)) {\n            return;\n        }\n        var percentageInViewport = getScrollPercentage_1.getScrollPercentage(el);\n        if (config.debugMode) {\n            console.log(i + \": percentageInViewport\", percentageInViewport);\n        }\n        var pixelsToMoveBasedOnPercentageInViewPort = percentageInViewport * config.pixelsOverflowing * config.speedRatio;\n        el.style.backgroundPosition = config.defaultXPosition + \" -\" + pixelsToMoveBasedOnPercentageInViewPort + \"px\";\n    });\n};\n\n\n//# sourceURL=webpack://Parallax/./src/lib/doParallaxEffect.ts?");
-
-/***/ }),
-
-/***/ "./src/lib/getBackgroundImageURLfromElement.ts":
-/*!*****************************************************!*\
-  !*** ./src/lib/getBackgroundImageURLfromElement.ts ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.getBackgroundImageURLFromElement = function (el) {\n    if (!el.style.backgroundImage) {\n        return;\n    }\n    var backgroundImageStyle = el.style.backgroundImage;\n    return backgroundImageStyle\n        .replace('url(', '')\n        .replace(')', '')\n        .replace(/\\\"/gi, '');\n};\n\n\n//# sourceURL=webpack://Parallax/./src/lib/getBackgroundImageURLfromElement.ts?");
-
-/***/ }),
-
-/***/ "./src/lib/getImageSize.ts":
-/*!*********************************!*\
-  !*** ./src/lib/getImageSize.ts ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.getImageSize = function (url) {\n    var image = new Image();\n    image.src = url;\n    return {\n        width: image.width,\n        height: image.height\n    };\n};\n\n\n//# sourceURL=webpack://Parallax/./src/lib/getImageSize.ts?");
-
-/***/ }),
-
-/***/ "./src/lib/getPixelsOverflowing.ts":
-/*!*****************************************!*\
-  !*** ./src/lib/getPixelsOverflowing.ts ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.getPixelsOverflowing = function (elementBoundingClientRect, backgroundImageSize) {\n    var elementWidth = elementBoundingClientRect.width;\n    var backgroundImageWidth = backgroundImageSize.width;\n    var ratio = elementWidth / backgroundImageWidth;\n    return ratio * backgroundImageSize.height - elementBoundingClientRect.height;\n};\n\n\n//# sourceURL=webpack://Parallax/./src/lib/getPixelsOverflowing.ts?");
 
 /***/ }),
 
@@ -390,18 +354,6 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar of
 
 "use strict";
 eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.getSpeedLimit = function (speed) {\n    if (speed < 0.1) {\n        return 0.1;\n    }\n    if (speed > 0.5) {\n        return 0.5;\n    }\n    return speed;\n};\n\n\n//# sourceURL=webpack://Parallax/./src/lib/getSpeedLimit.ts?");
-
-/***/ }),
-
-/***/ "./src/lib/isImageOverflowSmallerThanAllowed.ts":
-/*!******************************************************!*\
-  !*** ./src/lib/isImageOverflowSmallerThanAllowed.ts ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar getPixelsOverflowing_1 = __webpack_require__(/*! ./getPixelsOverflowing */ \"./src/lib/getPixelsOverflowing.ts\");\nvar getBackgroundImageURLfromElement_1 = __webpack_require__(/*! ./getBackgroundImageURLfromElement */ \"./src/lib/getBackgroundImageURLfromElement.ts\");\nvar getImageSize_1 = __webpack_require__(/*! ./getImageSize */ \"./src/lib/getImageSize.ts\");\nexports.isImageOverflowSmallerThanAllowed = function (el, config) {\n    var boundingClientRect = el.getBoundingClientRect();\n    var url = getBackgroundImageURLfromElement_1.getBackgroundImageURLFromElement(el);\n    var imageSize = getImageSize_1.getImageSize(url);\n    var pixelsOverflowing = getPixelsOverflowing_1.getPixelsOverflowing(boundingClientRect, imageSize);\n    if (pixelsOverflowing < config.pixelsOverflowing) {\n        return true;\n    }\n    return false;\n};\n\n\n//# sourceURL=webpack://Parallax/./src/lib/isImageOverflowSmallerThanAllowed.ts?");
 
 /***/ }),
 
