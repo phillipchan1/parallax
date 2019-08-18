@@ -28,16 +28,24 @@ export const initAndGetConfig = (
     const boundingClientRect = el.getBoundingClientRect()
     const elementOffset = offset(el)
     const initialPercentageInViewport = getScrollPercentage(el)
-
-    const resizedImageBasedOnOverflow = resizeImage({
+    const initialDimensions = {
       width: boundingClientRect.width,
       height: boundingClientRect.height
-    })
+    }
+
+    const resizedImageBasedOnOverflow = resizeImage(
+      initialDimensions,
+      config.pixelsOverflowing
+    )
     console.log(`TCL: resizedImageBasedOnOverflow`, resizedImageBasedOnOverflow)
 
-    el.style.backgroundSize = `${boundingClientRect.width +
-      config.pixelsOverflowing}px ${boundingClientRect.height +
-      config.pixelsOverflowing}px`
+    // el.style.backgroundSize = `${boundingClientRect.width +
+    //   config.pixelsOverflowing}px ${boundingClientRect.height +
+    //   config.pixelsOverflowing}px`
+
+    el.style.backgroundSize = `${resizedImageBasedOnOverflow.width}px ${
+      resizedImageBasedOnOverflow.height
+    }px`
 
     // set generic styles
     setStylesOnElement(el)
@@ -45,10 +53,10 @@ export const initAndGetConfig = (
     el.style.backgroundPosition = `${config.defaultXPosition} 0px`
 
     elementSpecs[i] = {
+      initialDimensions,
       offsetTop: elementOffset.top,
       initialPercentageInViewport,
-      width: boundingClientRect.width,
-      height: boundingClientRect.height
+      resizedDimensions: resizedImageBasedOnOverflow
     }
   })
 
