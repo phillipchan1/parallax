@@ -3,6 +3,7 @@ import * as offset from 'document-offset'
 import { getScrollPercentage } from './lib/getScrollPercentage'
 import { setStylesOnElement } from './lib/setStylesOnElement'
 import { ElementSpecs } from './types/ElementSpecs'
+import { resizeImage } from './lib/resizeImage'
 
 import { Config } from './types/Config'
 
@@ -28,6 +29,12 @@ export const initAndGetConfig = (
     const elementOffset = offset(el)
     const initialPercentageInViewport = getScrollPercentage(el)
 
+    const resizedImageBasedOnOverflow = resizeImage({
+      width: boundingClientRect.width,
+      height: boundingClientRect.height
+    })
+    console.log(`TCL: resizedImageBasedOnOverflow`, resizedImageBasedOnOverflow)
+
     el.style.backgroundSize = `${boundingClientRect.width +
       config.pixelsOverflowing}px ${boundingClientRect.height +
       config.pixelsOverflowing}px`
@@ -39,7 +46,9 @@ export const initAndGetConfig = (
 
     elementSpecs[i] = {
       offsetTop: elementOffset.top,
-      initialPercentageInViewport
+      initialPercentageInViewport,
+      width: boundingClientRect.width,
+      height: boundingClientRect.height
     }
   })
 
