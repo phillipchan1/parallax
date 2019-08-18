@@ -1,8 +1,8 @@
 import * as offset from 'document-offset'
 
-import { isImageOverflowSmallerThanAllowed } from './lib/isImageOverflowSmallerThanAllowed'
 import { getScrollPercentage } from './lib/getScrollPercentage'
 import { setStylesOnElement } from './lib/setStylesOnElement'
+import { ElementSpecs } from './types/ElementSpecs'
 
 import { Config } from './types/Config'
 
@@ -21,9 +21,7 @@ export const initAndGetConfig = (
   elements: NodeList,
   config: Config
 ): Config => {
-  // create new config object with user defined config
-
-  var elementSpecs = []
+  var elementSpecs: ElementSpecs[] = []
 
   elements.forEach((el: HTMLElement, i) => {
     const boundingClientRect = el.getBoundingClientRect()
