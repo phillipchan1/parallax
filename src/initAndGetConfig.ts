@@ -40,12 +40,14 @@ export const initAndGetConfig = (
 
     const resizedImageSize = getResizedBackgroundImageSize(
       containerDimensions,
-      backgroundImageSize
+      backgroundImageSize,
+      config
     )
+    console.log(`TCL: resizedImageSize`, resizedImageSize)
 
-    // el.style.backgroundSize = `${resizedImageBasedOnOverflow.width}px ${
-    //   resizedImageBasedOnOverflow.height
-    //   }px`
+    el.style.backgroundSize = `${resizedImageSize.width}px ${
+      resizedImageSize.height
+    }px`
 
     // set initial background Position
     el.style.backgroundPosition = `${config.defaultXPosition} 0px`
