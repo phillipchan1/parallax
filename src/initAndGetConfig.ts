@@ -2,7 +2,9 @@ import * as offset from 'document-offset'
 
 import { getScrollPercentage } from './lib/getScrollPercentage'
 import { ElementSpecs } from './types/ElementSpecs'
-import { resizeImageByAddition } from './lib/resizeImage'
+import { getResizedBackgroundImageSize } from './lib/getResizedBackgroundImageSize'
+import { getImageSize } from './lib/getImageSize'
+import { getBackgroundImageURLFromElement } from './lib/getBackgroundImageURLFromElement'
 
 import { Config } from './types/Config'
 
@@ -27,32 +29,33 @@ export const initAndGetConfig = (
     const boundingClientRect = el.getBoundingClientRect()
     const elementOffset = offset(el)
     const initialPercentageInViewport = getScrollPercentage(el)
-    const initialDimensions = {
+    const containerDimensions = {
       width: boundingClientRect.width,
       height: boundingClientRect.height
     }
 
-    const resizedImageBasedOnOverflow = resizeImageByAddition(
-      initialDimensions,
-      config.pixelsOverflowing
+    // get and set background image Size
+    const backgroundImageURL = getBackgroundImageURLFromElement(el)
+    const backgroundImageSize = getImageSize(backgroundImageURL)
+
+    const resizedImageSize = getResizedBackgroundImageSize(
+      containerDimensions,
+      backgroundImageSize
     )
-    console.log(`TCL: resizedImageBasedOnOverflow`, resizedImageBasedOnOverflow)
 
-    // el.style.backgroundSize = `${boundingClientRect.width +
-    //   config.pixelsOverflowing}px ${boundingClientRect.height +
-    //   config.pixelsOverflowing}px`
+    // el.style.backgroundSize = `${resizedImageBasedOnOverflow.width}px ${
+    //   resizedImageBasedOnOverflow.height
+    //   }px`
 
-    el.style.backgroundSize = `${resizedImageBasedOnOverflow.width}px ${
-      resizedImageBasedOnOverflow.height
-    }px`
-
+    // set initial background Position
     el.style.backgroundPosition = `${config.defaultXPosition} 0px`
 
     elementSpecs[i] = {
-      initialDimensions,
+      containerDimensions,
       offsetTop: elementOffset.top,
       initialPercentageInViewport,
-      resizedDimensions: resizedImageBasedOnOverflow
+      initialImageSize: backgroundImageSize,
+      resizedImageSize
     }
   })
 
