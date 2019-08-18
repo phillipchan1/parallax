@@ -1,7 +1,6 @@
 import * as offset from 'document-offset'
 
 import { getScrollPercentage } from './lib/getScrollPercentage'
-import { setStylesOnElement } from './lib/setStylesOnElement'
 import { ElementSpecs } from './types/ElementSpecs'
 import { resizeImage } from './lib/resizeImage'
 
@@ -46,9 +45,6 @@ export const initAndGetConfig = (
     el.style.backgroundSize = `${resizedImageBasedOnOverflow.width}px ${
       resizedImageBasedOnOverflow.height
     }px`
-
-    // set generic styles
-    setStylesOnElement(el)
 
     el.style.backgroundPosition = `${config.defaultXPosition} 0px`
 
