@@ -43,7 +43,6 @@ export const initAndGetConfig = (
       backgroundImageSize,
       config
     )
-    console.log(`TCL: resizedImageSize`, resizedImageSize)
 
     el.style.backgroundSize = `${resizedImageSize.width}px ${
       resizedImageSize.height
