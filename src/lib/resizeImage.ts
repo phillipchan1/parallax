@@ -1,22 +1,42 @@
 import { RectangleSize } from '../types/RectangleSize'
 import { Side } from '../types/Side'
 
-export const resizeImage = (
-  image: RectangleSize,
+export const resizeImageByAddition = (
+  imageSize: RectangleSize,
   pixelsToChange: number = 0,
   side: Side = 'height'
 ): RectangleSize => {
-  const percentageToChange = pixelsToChange / image[side]
+  const percentageToChange = pixelsToChange / imageSize[side]
 
   if (side === 'height') {
     return {
-      height: image.height + pixelsToChange,
-      width: image.width * (1 + percentageToChange)
+      height: imageSize.height + pixelsToChange,
+      width: imageSize.width * (1 + percentageToChange)
     }
   } else {
     return {
-      width: image.width + pixelsToChange,
-      height: image.height * (1 + percentageToChange)
+      width: imageSize.width + pixelsToChange,
+      height: imageSize.height * (1 + percentageToChange)
+    }
+  }
+}
+
+export const resizeImageByDimension = (
+  imageSize: RectangleSize,
+  newSize: number,
+  side: Side
+): RectangleSize => {
+  const percentageToChange = newSize / imageSize[side]
+
+  if (side === 'height') {
+    return {
+      height: newSize,
+      width: imageSize.width * percentageToChange
+    }
+  } else {
+    return {
+      width: newSize,
+      height: imageSize.height * percentageToChange
     }
   }
 }

@@ -2,7 +2,7 @@ import * as offset from 'document-offset'
 
 import { getScrollPercentage } from './lib/getScrollPercentage'
 import { ElementSpecs } from './types/ElementSpecs'
-import { resizeImage } from './lib/resizeImage'
+import { resizeImageByAddition } from './lib/resizeImage'
 
 import { Config } from './types/Config'
 
@@ -32,7 +32,7 @@ export const initAndGetConfig = (
       height: boundingClientRect.height
     }
 
-    const resizedImageBasedOnOverflow = resizeImage(
+    const resizedImageBasedOnOverflow = resizeImageByAddition(
       initialDimensions,
       config.pixelsOverflowing
     )
