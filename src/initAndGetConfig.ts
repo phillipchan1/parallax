@@ -29,13 +29,10 @@ export const initAndGetConfig = (
     const boundingClientRect = el.getBoundingClientRect()
     const elementOffset = offset(el)
     const initialPercentageInViewport = getScrollPercentage(el)
-    let imageIsOverflowingSmallerThanAllowed = false
 
     el.style.backgroundSize = `${boundingClientRect.width +
       config.pixelsOverflowing}px ${boundingClientRect.height +
       config.pixelsOverflowing}px`
-
-    imageIsOverflowingSmallerThanAllowed = true
 
     // set generic styles
     setStylesOnElement(el)
@@ -44,8 +41,7 @@ export const initAndGetConfig = (
 
     elementSpecs[i] = {
       offsetTop: elementOffset.top,
-      initialPercentageInViewport,
-      imageIsOverflowingSmallerThanAllowed
+      initialPercentageInViewport
     }
   })
 
