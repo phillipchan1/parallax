@@ -1,11 +1,11 @@
-import { ImageSize } from '../types/ImageSize'
+import { RectangleSize } from '../types/RectangleSize'
 import { Side } from '../types/Side'
 
 export const resizeImage = (
-  image: ImageSize,
+  image: RectangleSize,
   pixelsToChange: number = 0,
   side: Side = 'height'
-): ImageSize => {
+): RectangleSize => {
   const percentageToChange = pixelsToChange / image[side]
 
   if (side === 'height') {

@@ -1,4 +1,4 @@
-export type ImageSize = {
+export type RectangleSize = {
   width: number
   height: number
 }

@@ -1,6 +1,6 @@
-import { ImageSize } from '../types/ImageSize'
+import { RectangleSize } from '../types/RectangleSize'
 
-export const getImageSize = (url: string): ImageSize => {
+export const getImageSize = (url: string): RectangleSize => {
   var image = new Image()
   image.src = url
 

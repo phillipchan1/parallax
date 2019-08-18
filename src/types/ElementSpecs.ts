@@ -1,8 +1,8 @@
-import { ImageSize } from './ImageSize'
+import { RectangleSize } from './RectangleSize'
 
 export type ElementSpecs = {
   offsetTop: number
   initialPercentageInViewport: number
-  initialDimensions: ImageSize
-  resizedDimensions: ImageSize
+  initialDimensions: RectangleSize
+  resizedDimensions: RectangleSize
 }

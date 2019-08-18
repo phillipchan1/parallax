@@ -1,8 +1,8 @@
-import { ImageSize } from '../types/ImageSize'
+import { RectangleSize } from '../types/RectangleSize'
 
 export const getPixelsOverflowing = (
   elementBoundingClientRect: ClientRect,
-  backgroundImageSize: ImageSize
+  backgroundImageSize: RectangleSize
 ): number => {
   const elementWidth = elementBoundingClientRect.width
   const backgroundImageWidth = backgroundImageSize.width
