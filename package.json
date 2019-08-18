@@ -18,9 +18,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^24.0.17",
     "@types/node": "^12.6.9",
     "gulp": "^3.9.1",
     "gulp-server-livereload": "^1.9.2",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
     "typescript": "^3.5.3",
     "webpack": "^4.38.0",
