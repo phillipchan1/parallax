@@ -35,6 +35,7 @@ export const initAndGetConfig = (
 
     // get and set background image Size
     const backgroundImageURL = getBackgroundImageURLFromElement(el)
+
     if (config.debugMode) {
       console.log(`TCL: backgroundImageURL`, backgroundImageURL)
     }
