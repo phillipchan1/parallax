@@ -27,8 +27,7 @@ export const initAndGetConfig = (
 
   elements.forEach((el: HTMLElement, i) => {
     const boundingClientRect = el.getBoundingClientRect()
-    const elementOffset = offset(el)
-    const initialPercentageInViewport = getScrollPercentage(el)
+
     const containerDimensions = {
       width: boundingClientRect.width,
       height: boundingClientRect.height
@@ -36,7 +35,15 @@ export const initAndGetConfig = (
 
     // get and set background image Size
     const backgroundImageURL = getBackgroundImageURLFromElement(el)
+    if (config.debugMode) {
+      console.log(`TCL: backgroundImageURL`, backgroundImageURL)
+    }
+
     const backgroundImageSize = getImageSize(backgroundImageURL)
+
+    if (config.debugMode) {
+      console.log(`TCL: backgroundImageSize`, backgroundImageSize)
+    }
 
     const resizedImageSize = getResizedBackgroundImageSize(
       containerDimensions,
@@ -50,6 +57,10 @@ export const initAndGetConfig = (
 
     // set initial background Position
     el.style.backgroundPosition = `${config.defaultXPosition} 0px`
+
+    // add additional information
+    const elementOffset = offset(el)
+    const initialPercentageInViewport = getScrollPercentage(el)
 
     elementSpecs[i] = {
       containerDimensions,

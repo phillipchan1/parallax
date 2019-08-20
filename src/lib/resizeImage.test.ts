@@ -128,5 +128,9 @@ describe('resizeImage module', () => {
       // assert
       expect(actual).toEqual(expected)
     })
+
+    it('should work with these dimensions', () => {
+      const testImageSize = { width: 1043, height: 690 }
+    })
   })
 })
