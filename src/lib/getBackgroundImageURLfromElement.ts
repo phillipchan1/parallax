@@ -4,6 +4,7 @@ export const getBackgroundImageURLFromElement = (el: HTMLElement) => {
   }
 
   const backgroundImageStyle = el.style.backgroundImage
+
   return backgroundImageStyle
     .replace('url(', '')
     .replace(')', '')
