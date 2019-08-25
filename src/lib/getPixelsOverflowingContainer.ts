@@ -1,8 +1,8 @@
-import { RectangleSize } from '../types/RectangleSize'
+import { RectangleDimensions } from '../types/RectangleDimensions'
 
 export const getPixelsOverflowingContainer = (
-  containerSize: RectangleSize,
-  backgroundImageSize: RectangleSize,
+  containerSize: RectangleDimensions,
+  backgroundImageSize: RectangleDimensions,
   buffer: number
 ): number => {
   const backgroundImageWidth = backgroundImageSize.width

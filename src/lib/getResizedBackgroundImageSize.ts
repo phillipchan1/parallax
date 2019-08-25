@@ -1,10 +1,10 @@
-import { RectangleSize } from '../types/RectangleSize'
+import { RectangleDimensions } from '../types/RectangleDimensions'
 import { resizeImageByDimension, resizeImageByAddition } from './resizeImage'
 import { Config } from '../types/Config'
 
 export const getResizedBackgroundImageSize = (
-  containerSize: RectangleSize,
-  imageSize: RectangleSize,
+  containerSize: RectangleDimensions,
+  imageSize: RectangleDimensions,
   config: Config
 ) => {
   // 1) get dimension of image based on the width of the container
@@ -15,10 +15,7 @@ export const getResizedBackgroundImageSize = (
   )
 
   if (config.debugMode) {
-    console.log(
-      `TCL: imageSizeIfWidthOfContainer`,
-      imageSizeIfWidthOfContainer
-    )
+    console.log(`TCL: imageSizeIfWidthOfContainer`, imageSizeIfWidthOfContainer)
   }
 
   // 2) see how far off height is from container + pixelsoverflowing
