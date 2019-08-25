@@ -38,7 +38,7 @@ class Parallax {
           if (specs.debugMode) {
             console.log(`TCL: window.onload -> config`, specs)
           }
-        }, 500)
+        }, 300)
       )
     }
   }

@@ -38,6 +38,9 @@ export const getResizedBackgroundImageSize = (
     config.pixelsOverflowing -
     imageSizeIfWidthOfContainer.height
 
+  if (pixelsToMakeItWork < 0) {
+    return imageSizeIfWidthOfContainer
+  }
   //  3) get resized image based on that difference
   return resizeImageByAddition(
     imageSizeIfWidthOfContainer,
