@@ -8,7 +8,7 @@ export const getResizedBackgroundImageSize = (
   config: Config
 ) => {
   // 1) get dimension of image based on the width of the container
-  const imageWidthIfWidthOfContainer = resizeImageByDimension(
+  const imageSizeIfWidthOfContainer = resizeImageByDimension(
     imageSize,
     containerSize.width,
     'width'
@@ -16,14 +16,14 @@ export const getResizedBackgroundImageSize = (
 
   if (config.debugMode) {
     console.log(
-      `TCL: imageWidthIfWidthOfContainer`,
-      imageWidthIfWidthOfContainer
+      `TCL: imageSizeIfWidthOfContainer`,
+      imageSizeIfWidthOfContainer
     )
   }
 
   // 2) see how far off height is from container + pixelsoverflowing
   const pixelsDeltaFromContainer =
-    imageWidthIfWidthOfContainer.height -
+    imageSizeIfWidthOfContainer.height -
     config.pixelsOverflowing -
     containerSize.height
 
@@ -33,17 +33,17 @@ export const getResizedBackgroundImageSize = (
 
   // 2a) if its within threshold, just return resized to container imageSize
   if (pixelsDeltaFromContainer > config.pixelsOverflowing) {
-    return imageWidthIfWidthOfContainer
+    return imageSizeIfWidthOfContainer
   }
 
   const pixelsToMakeItWork =
     containerSize.height +
     config.pixelsOverflowing -
-    imageWidthIfWidthOfContainer.height
+    imageSizeIfWidthOfContainer.height
 
   //  3) get resized image based on that difference
   return resizeImageByAddition(
-    imageWidthIfWidthOfContainer,
+    imageSizeIfWidthOfContainer,
     pixelsToMakeItWork,
     'height'
   )

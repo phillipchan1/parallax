@@ -1,7 +1,7 @@
 @import '../dist/main.css';
 
 .full-width {
-  background: black;
+  background-color: black;
   padding: 100px 0 150px;
 }
 
