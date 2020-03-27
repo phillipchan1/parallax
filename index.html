@@ -1,126 +1,201 @@
 <!DOCTYPE html>
-<html class="no-js" lang="">
+<!--
+
+Copyright 2016 Google Inc. All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-->
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>parallax</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <!-- Place favicon.ico in the root directory -->
-
     <link
+      href="https://fonts.googleapis.com/css?family=Sahitya|Share+Tech+Mono|Yanone+Kaffeesatz"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
     />
-    <link rel="stylesheet" href="dist/main.css" />
-    <link rel="stylesheet" href="css/main.css" />
-  </head>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        font-family: 'Yanone Kaffeesatz';
+        color: white;
+        font-size: 18px;
+        letter-spacing: 1.5px;
+        line-height: 1.5em;
+      }
+      * {
+        box-sizing: border-box;
+      }
 
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class=" column">
-          <h1>parallax</h1>
-        </div>
-      </div>
-    </div>
-    <div
-      class="full-width parallax"
-      style="background-image: url(https://cdn2.hubspot.net/hubfs/507386/CLEAN-images/heros/coast-drone-view.jpg)"
-    >
-      <div class="container">
-        <p>
-          Base reach explain for other level. Perhaps sell yeah develop man any
-          spend. Week down way concern if family economy. Force attack director
-          interesting learn save. Avoid almost property enter term. Respond
-          design establish chance former. Break reduce all specific. Exactly
-          send idea. Energy again care interest hope.
-        </p>
-      </div>
-    </div>
+      .scene {
+        height: 150vh;
+        padding: 5vh 10vw;
+      }
 
-    <div class="container">
-      <div class="row">
-        <div class=" column standard-padding-vertical">
-          <p>
-            Base reach explain for other level. Perhaps sell yeah develop man
-            any spend. Week down way concern if family economy. Force attack
-            director interesting learn save. Avoid almost property enter term.
-            Respond design establish chance former. Break reduce all specific.
-            Exactly send idea. Energy again care interest hope. Base reach
-            explain for other level. Perhaps sell yeah develop man any spend.
-            Week down way concern if family economy. Force attack director
-            interesting learn save. Avoid almost property enter term. Respond
-            design establish chance former. Break reduce all specific. Exactly
-            send idea. Energy again care interest hope. Base reach explain for
-            other level. Perhaps sell yeah develop man any spend. Week down way
-            concern if family economy. Force attack director interesting learn
-            save. Avoid almost property enter term. Respond design establish
-            chance former. Break reduce all specific. Exactly send idea. Energy
-            again care interest hope. Base reach explain for other level.
-            Perhaps sell yeah develop man any spend. Week down way concern if
-            family economy. Force attack director interesting learn save. Avoid
-            almost property enter term. Respond design establish chance former.
-            Break reduce all specific. Exactly send idea. Energy again care
-            interest hope.
-          </p>
-        </div>
-      </div>
-    </div>
+      .parallax {
+        background-size: cover;
+        box-sizing: border-box;
+        width: 100%;
+        height: 130vh;
+        /* Since the parallax elements still consume space, we set the margin to undo
+     the height of this parallax element making it essentially consume 0 space.
+  */
+        margin-bottom: -130vh;
+      }
 
-    <div class="container">
-      <div class="row">
-        <div
-          class="six columns parallax-half-width "
-          style="background-image: url(https://images.unsplash.com/photo-1429497627149-e7839eef4fdb?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=900&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=1600)"
-        >
-          his
-        </div>
-        <div class="six columns">
-          r level. Perhaps sell yeah develop man any spend. Week down way
-          concern if family economy. Force attack director interesting learn
-          save. Avoid almost property enter term. Respond design establish
-          chance former. Break reduce all specific. Exactly send idea. Energy
-          again care interest hope. Base reach explain for other level. Perhaps
-          sell yeah develop man any spend. Week down way concern if family
-          economy. Force attack director interesting learn save. Avoid almost
-          property enter term. Respond design establish chance former. Break
-          reduce all specific. Exactly send idea. Energy again care interest
-          hope.
-        </div>
-      </div>
-    </div>
+      .header {
+        height: 70vh;
+      }
+      .parallax.header {
+        margin-bottom: -70vh;
+      }
 
-    <div class="container standard-padding-vertical">
-      <p>
-        r level. Perhaps sell yeah develop man any spend. Week down way concern
-        if family economy. Force attack director interesting learn save. Avoid
-        almost property enter term. Respond design establish chance former.
-        Break reduce all specific. Exactly send idea. Energy again care interest
-        hope. Base reach explain for other level. Perhaps sell yeah develop man
-        any spend. Week down way concern if family economy. Force attack
-        director interesting learn save. Avoid almost property enter term.
-        Respond design establish chance former. Break reduce all specific.
-        Exactly send idea. Energy again care interest hope.
-      </p>
-    </div>
-    <div class="container">
-      <div
-        class="row hero-parallax parallax-container"
-        style="background-image: url(https://images.unsplash.com/photo-1425321442387-141779fb1e57?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=1600)"
-      >
-        <p>this is</p>
-      </div>
-    </div>
+      p {
+        color: white;
+        margin: 1em 0;
+        z-index: 1;
+        position: relative;
+      }
 
-    <script src="dist/index.js"></script>
+      .viewport {
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+        -webkit-overflow-scrolling: touch;
+      }
+      .woods:not(.header),
+      .sunset:not(.header) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .sunset:not(.header) {
+        align-items: flex-end;
+      }
+      .solid {
+        z-index: 1;
+        position: relative;
+        height: 70vh;
+        font-size: 1.5em;
+        line-height: 1.5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      .solid.star {
+        background-image: linear-gradient(
+          hsla(240, 90%, 8%, 1) 0%,
+          99%,
+          hsla(217, 24%, 71%, 0) 100%
+        );
+        box-shadow: -10px -10px 20px hsl(240, 90%, 8%);
+      }
+      .solid.woods {
+        background-color: hsl(195, 16%, 49%);
+        box-shadow: -10px -10px 20px hsl(195, 16%, 49%);
+      }
+      a,
+      a:link,
+      a:active,
+      a:hover,
+      a:visited {
+        color: hsl(240, 100%, 90%);
+        display: flex;
+        align-items: flex-end;
+      }
+    </style>
+    <script src="dist/3rdpartyparallax.js"></script>
     <script>
-      new Parallax({
-        debugMode: true,
-        speedRatio: 2
+      document.addEventListener('DOMContentLoaded', function() {
+        initializeParallax(document.querySelector('.viewport'))
       })
     </script>
+  </head>
+  <body>
+    <div class="viewport">
+      <div>
+        <!-- Specifying a parallax rate of 0.3 will slide the image at that proportion of the scroll speed. -->
+        <div
+          class="parallax header"
+          style="background-image: url('images/stars.jpg');"
+          parallax="0.3"
+        ></div>
+        <div class="scene header">
+          <h1>Gazing into the stars&nbsp;&nbsp;🐱</h1>
+          <h2>When cats use <code>requestIdleCallback</code></h2>
+        </div>
+        <div class="scene solid star">
+          <p>
+            What’s this? This is a parallax scroller. But not just yet another
+            parallax scroller, it’s one that doesn’t rely on JavaScript for the
+            animation, that works on both desktop and mobile and has 60fps while
+            scrolling. This was a lot harder than we originally anticipated, so
+            we wrote up what we did for you to read!
+          </p>
+          <p>
+            <a
+              href="https://developers.google.com/web/updates/2016/12/performant-parallaxing"
+            >
+              <img
+                src="images/screengrab.jpg"
+                style="width: 10vw; float: left; margin-right: 2vw;"
+              />
+              Read the article on developers.google.com!</a
+            >
+          </p>
+        </div>
+        <!-- When a rate isn't specified, it will be calculated such that the image always fills the space between the
+           element before it and the next element with the "parallax-cover" attribute. -->
+        <div
+          class="parallax"
+          style="background-image: url('images/sea.jpg');"
+          parallax
+        ></div>
+        <div class="scene woods">
+          <h1>Gazing into the sea&nbsp;&nbsp;🐳</h1>
+          <h2>Some people don’t have <code>class</code></h2>
+        </div>
+        <div class="scene solid woods" parallax-cover>
+          <p>
+            Lorem ipsum dolor sit amet, et natum mucius quo, nam zril offendit
+            ei. Cu mea amet paulo consequat. Eam nonumy integre malorum ei.
+            Fabulas feugait detracto cu usu. Ad brute moderatius sit, ne mel
+            ullum saperet.
+          </p>
+          <p>
+            Inermis petentium cotidieque sed cu. No duo alienum salutandi.
+            Exerci evertitur vix ea, mei audire conclusionemque an. His nisl
+            graece euismod ad.
+          </p>
+        </div>
+        <!-- When a rate isn't specified and there is no subsequent element with the "parallax-cover" attribute the rate
+           will be calculated such that the image slides until the end of the scrollable content. -->
+        <div
+          class="parallax"
+          style="background-image: url('images/sunset.jpg');"
+          parallax
+        ></div>
+        <div class="scene sunset">
+          <h1>Gazing into the sunset&nbsp;&nbsp;🌞</h1>
+          <h2><code>!important</code> is not a performance primitive</h2>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
