@@ -7,7 +7,7 @@
   /* Enable scrolling on the page. */
   overflow-y: auto;
   /* Set the perspective to 2px. This is essentailly the simulated distance from the viewport to transformed objects.*/
-  perspective: 11px;
+  perspective: 2px;
 }
 
 .parallax::after {
@@ -34,23 +34,6 @@
   background-image: url('https://source.unsplash.com/random');
 }
 
-.container {
-  height: 70vh;
-}
-
-.full-width {
-  background-color: white;
-  height: 70vh;
-}
-
 .standard-padding-vertical {
   padding: 1em 0;
-}
-
-.parallax-half-width {
-  padding: 7em 0;
-}
-
-.parallax-container {
-  padding: 5em 0;
 }
