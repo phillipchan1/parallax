@@ -9,8 +9,10 @@ export const getParallaxAreas = (config): ParallaxArea[] => {
   const parallaxAreas = []
 
   divsWithParallax.forEach((div, index) => {
+    const backgroundUrl = div.getAttribute(`data-parallax-background`)
+
     parallaxAreas.push({
-      backgroundUrl: 'https://source.unsplash.com/random',
+      backgroundUrl,
       className: `${config.parallaxClassName}-${index}`
     })
   })

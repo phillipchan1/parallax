@@ -14,7 +14,6 @@ class Parallax {
 
     initParallaxAreas(config)
     const parallaxAreas = getParallaxAreas(config)
-    console.log('Parallax -> constructor -> parallaxAreas', parallaxAreas)
 
     configureParallax(config, parallaxAreas)
   }
