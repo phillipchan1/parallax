@@ -2,7 +2,7 @@ import { Config } from '../types/Config'
 
 export const mergeConfig = (
   presetConfig: Config,
-  userConfig: Config
+  userConfig: Partial<Config>
 ): Config => {
   const safeGuardedUserConfig = {
     ...userConfig

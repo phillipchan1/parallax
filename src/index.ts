@@ -1,13 +1,16 @@
 // import * as _ from 'lodash'
 import * as debounce from 'lodash/debounce'
 
-import { config } from './config'
-import { mergeConfig } from './lib/mergeConfig'
-import { initAndGetConfig } from './initAndGetConfig'
+import { defaultConfig } from './config'
+import { mergeConfig } from './lib/merge-config'
+import { configureParallax } from './lib/configure-parallax'
+import { Config } from './types/Config'
 
 class Parallax {
   constructor(userSetConfig) {
-    const setConfig = mergeConfig(config, userSetConfig)
+    const config: Config = mergeConfig(defaultConfig, userSetConfig)
+
+    configureParallax(config)
   }
 }
 
