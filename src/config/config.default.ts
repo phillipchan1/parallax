@@ -1,4 +1,4 @@
-import { Config } from './types/Config'
+import { Config } from './config.types'
 
 export const defaultConfig: Config = {
   debugMode: false,
