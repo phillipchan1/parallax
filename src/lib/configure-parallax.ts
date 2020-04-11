@@ -11,14 +11,25 @@ export const configureParallax = (
 
   const baseStyles = `
     .${config.wrapperClassName} {
-        height: 100vh;
-        overflow-x: hidden;
-        overflow-y: auto;
-        perspective: 2px;
+      height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      perspective: 2px;
     }
   `
 
   let parallaxElementsStyles = `
+
+    .${config.parallaxClassName} {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 0 0 5px #000;
+    }
+
     .${config.parallaxClassName}::after {
       content: ' ';
       position: absolute;
@@ -27,9 +38,8 @@ export const configureParallax = (
       bottom: 0;
       left: 0;
       transform: translateZ(-1px) scale(1.5);
-      background-size: 100%;
+      background-size: cover;
       z-index: -1;
-      background-repeat: no-repeat;
     }
   `
 
