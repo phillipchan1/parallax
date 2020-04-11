@@ -18,16 +18,25 @@ export const configureParallax = (
     }
   `
 
-  let parallaxElementsStyles = ``
+  let parallaxElementsStyles = `
+    .${config.parallaxClassName}::after {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      transform: translateZ(-1px) scale(1.5);
+      background-size: 100%;
+      z-index: -1;
+      background-repeat: no-repeat;
+    }
+  `
 
   parallaxAreas.forEach((parallaxArea: ParallaxArea) => {
     parallaxElementsStyles =
       parallaxElementsStyles +
       `
-        .${parallaxArea.className} {
-          opacity: 0.7    
-        }
-
         .${parallaxArea.className}::after {
           background-image: url(${parallaxArea.backgroundUrl})
         }
