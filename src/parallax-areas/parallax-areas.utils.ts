@@ -10,9 +10,12 @@ export const getParallaxAreas = (config): ParallaxArea[] => {
 
   divsWithParallax.forEach((div, index) => {
     const backgroundUrl = div.getAttribute(`data-parallax-background`)
+    const height =
+      div.getAttribute(`data-parallax-height`) || config.defaultHeight
 
     parallaxAreas.push({
       backgroundUrl,
+      height,
       className: `${config.parallaxClassName}-${index}`
     })
   })

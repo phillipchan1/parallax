@@ -7,13 +7,14 @@ import {
   initParallaxAreas,
   getParallaxAreas
 } from './parallax-areas/parallax-areas.utils'
+import { ParallaxArea } from './parallax-areas/parallax-areas.types'
 
 class Parallax {
   constructor(userSetConfig) {
     const config: Config = mergeConfig(defaultConfig, userSetConfig)
 
     initParallaxAreas(config)
-    const parallaxAreas = getParallaxAreas(config)
+    const parallaxAreas: ParallaxArea[] = getParallaxAreas(config)
 
     configureParallax(config, parallaxAreas)
   }

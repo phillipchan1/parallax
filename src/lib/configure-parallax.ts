@@ -22,12 +22,6 @@ export const configureParallax = (
 
     .${config.parallaxClassName} {
       position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-shadow: 0 0 5px #000;
     }
 
     .${config.parallaxClassName}::after {
@@ -47,6 +41,10 @@ export const configureParallax = (
     parallaxElementsStyles =
       parallaxElementsStyles +
       `
+        .${parallaxArea.className} {
+          height: ${parallaxArea.height}
+        }
+
         .${parallaxArea.className}::after {
           background-image: url(${parallaxArea.backgroundUrl})
         }

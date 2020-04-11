@@ -1,4 +1,5 @@
 export type ParallaxArea = {
-  backgroundUrl?: string
-  className?: string
+  backgroundUrl: string
+  className: string
+  height: string
 }
