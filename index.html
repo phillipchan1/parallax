@@ -94,9 +94,12 @@
 
     <script src="dist/index.js"></script>
     <script>
+      var urlParams = new URLSearchParams(window.location.search)
+      const speed = Number(urlParams.get('speed')) || 1
+
       new Parallax({
         debugMode: true,
-        speed: 1
+        speed
       })
     </script>
   </body>
