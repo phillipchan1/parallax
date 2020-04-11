@@ -39,6 +39,7 @@ export const configureParallax = (
       left: 0;
       transform: translateZ(-1px) scale(1.5);
       background-size: cover;
+      background-repeat: no-repeat;
       z-index: -1;
     }
   `
@@ -47,14 +48,14 @@ export const configureParallax = (
     parallaxElementsStyles =
       parallaxElementsStyles +
       `
-        .${parallaxArea.className} {
-          height: ${parallaxArea.height}
-        }
+      .${parallaxArea.className} {
+        height: ${parallaxArea.height}
+      }
 
-        .${parallaxArea.className}::after {
-          background-image: url(${parallaxArea.backgroundUrl})
-        }
-      `
+      .${parallaxArea.className}::after {
+        background-image: url(${parallaxArea.backgroundUrl})
+      }
+    `
   })
 
   const closing = `</style>`
