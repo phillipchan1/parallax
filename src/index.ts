@@ -13,6 +13,10 @@ class Parallax {
   constructor(userSetConfig) {
     const config: Config = mergeConfig(defaultConfig, userSetConfig)
 
+    if (config.debugMode) {
+      console.log('config :', config)
+    }
+
     initParallaxAreas(config)
     const parallaxAreas: ParallaxArea[] = getParallaxAreas(config)
 

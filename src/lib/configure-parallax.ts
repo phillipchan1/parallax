@@ -1,20 +1,26 @@
 import { ParallaxArea } from '../parallax-areas/parallax-areas.types'
 import { Config } from '../config/config.types'
+import { getParallaxSpeed } from './get-parallax-speed'
 
 export const configureParallax = (
   config: Config,
   parallaxAreas: ParallaxArea[]
 ) => {
   const head = document.querySelector('head')
+  const parallaxSpeed = getParallaxSpeed(config.speed)
 
   const opening = `<style>`
 
+  /**
+   * Perceived parallax speed is controlled
+   * by the perspective attribute
+   */
   const baseStyles = `
     .${config.wrapperClassName} {
       height: 100vh;
       overflow-x: hidden;
       overflow-y: auto;
-      perspective: 2px;
+      perspective: ${parallaxSpeed}px;
     }
   `
 
