@@ -30,3 +30,12 @@
 .parallax-section-1::after {
   background-image: url('https://source.unsplash.com/random');
 } */
+
+/* .wrapper {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.parallax {
+  position: -webkit-sticky;
+} */

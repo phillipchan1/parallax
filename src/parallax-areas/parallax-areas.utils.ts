@@ -12,11 +12,16 @@ export const getParallaxAreas = (config): ParallaxArea[] => {
     const backgroundUrl = div.getAttribute(`data-parallax-background`)
     const height =
       div.getAttribute(`data-parallax-height`) || config.defaultHeight
+    const overrideClassName = div.getAttribute(
+      `data-parallax-override-container-class`
+    )
 
     parallaxAreas.push({
       backgroundUrl,
       height,
-      className: `${config.parallaxClassName}-${index}`
+      className: overrideClassName
+        ? overrideClassName
+        : `${config.parallaxClassName}-${index}`
     })
   })
 

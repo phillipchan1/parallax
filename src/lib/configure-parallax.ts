@@ -1,3 +1,5 @@
+import * as _ from 'lodash'
+
 import { ParallaxArea } from '../parallax-areas/parallax-areas.types'
 import { Config } from '../config/config.types'
 import { getParallaxSpeed } from './get-parallax-speed'
@@ -24,27 +26,57 @@ export const configureParallax = (
     }
   `
 
-  let parallaxElementsStyles = `
+  let parallaxStylesTemplate = `
+    position: relative;
+  `
 
+  let parallaxStylesAfterTemplate = `
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateZ(-1px) scale(1.5);
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+  `
+
+  let parallaxElementsStyles = `
     .${config.parallaxClassName} {
-      position: relative;
+      ${parallaxStylesTemplate}
     }
 
     .${config.parallaxClassName}::after {
-      content: ' ';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      transform: translateZ(-1px) scale(1.5);
-      background-size: cover;
-      background-repeat: no-repeat;
-      z-index: -1;
+     ${parallaxStylesAfterTemplate}
     }
   `
 
+  // configure override default parallax settings
+  const overrideContainers = _.chain(parallaxAreas)
+    .filter((parallaxArea: ParallaxArea) => {
+      return !parallaxArea.className.includes(config.parallaxClassName)
+    })
+    .map((filtered) => filtered.className)
+    .value()
+
+  overrideContainers.forEach((overrideClassName: string) => {
+    parallaxElementsStyles =
+      parallaxElementsStyles +
+      `
+        .${overrideClassName} {
+          ${parallaxStylesTemplate}
+        }
+
+        .${overrideClassName}::after {
+          ${parallaxStylesAfterTemplate}
+        }
+      `
+  })
+
   parallaxAreas.forEach((parallaxArea: ParallaxArea) => {
+    // configure each parallax container
     parallaxElementsStyles =
       parallaxElementsStyles +
       `
