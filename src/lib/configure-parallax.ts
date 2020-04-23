@@ -28,6 +28,7 @@ export const configureParallax = (
 
   let parallaxStylesTemplate = `
     position: relative;
+    display: block;
   `
 
   let parallaxStylesAfterTemplate = `
